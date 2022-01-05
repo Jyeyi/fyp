@@ -15,7 +15,7 @@ public class admin_user extends AppCompatActivity {
 
     private RecyclerView recyclerUser;
     private DatabaseReference db;
-    private ArrayList
+    private ArrayList arrayList;
 
 
     @Override
