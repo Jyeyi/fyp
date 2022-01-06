@@ -1,39 +1,68 @@
 package com.example.fyp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
+import com.example.fyp.adapter.AdapterOwnTicket;
+import com.example.fyp.model.TicketModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class user_main extends AppCompatActivity {
+import java.util.ArrayList;
 
-    private FirebaseDatabase db;
-    private DatabaseReference dbref;
-    private FirebaseAuth auth;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class activity_own_ticket extends AppCompatActivity {
+
+    private RecyclerView recyclerViewOwnTicket;
+    private DatabaseReference databaseReference;
+    private ArrayList<TicketModel> ticketModelArrayList = new ArrayList<>();
+    private AdapterOwnTicket adapterOwnTicket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_main);
+        setContentView(R.layout.activity_own_ticket);
 
 
+        for (int i = 0; i<5; i++){
+            TicketModel ticket = new TicketModel();
+            ticket.setTicketID("sgsggs");
+            ticket.setCompanyName("cepatExpress");
+            ticket.setToLocation("chaah");
+            ticket.setFromLocation("jb");
+            ticket.setDepartureTime("2PM 12/1/2022");
+            ticket.setTicketID("121212");
+            ticket.setAdultTicket(true);
+            ticketModelArrayList.add(ticket);
+        }
+
+        setupView();
+        setupAdapter();
+        setupNavigationBar();
+    }
+
+    void setupView(){
+        recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
+    }
+
+    void setupAdapter(){
+        recyclerViewOwnTicket.setHasFixedSize(true);
+        recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
+
+        adapterOwnTicket = new AdapterOwnTicket(this,ticketModelArrayList);
+        recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
+    }
+
+    void setupNavigationBar(){
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setSelectedItemId(R.id.ticket);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -58,6 +87,5 @@ public class user_main extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 }

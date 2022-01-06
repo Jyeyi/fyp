@@ -1,3 +1,180 @@
+
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+<!-- Default screen margins, per the Android Design guidelines. -->
+<dimen name="fab_margin">16dp</dimen>
+<dimen name="activity_horizontal_margin">16dp</dimen>
+<dimen name="activity_vertical_margin">16dp</dimen>
+<dimen name="nav_header_vertical_spacing">8dp</dimen>
+<dimen name="nav_header_height">176dp</dimen>
+
+<dimen name="common_space">2dp</dimen>
+
+<!-- margin -->
+<dimen name="common_margin_tiny">2dp</dimen>
+<dimen name="common_margin_small">4dp</dimen>
+<dimen name="common_margin">8dp</dimen>
+<dimen name="common_margin_large">16dp</dimen>
+<dimen name="common_margin_medium">25dp</dimen>
+<dimen name="common_margin_huge">32dp</dimen>
+<dimen name="toolbar_margin">55dp</dimen>
+<dimen name="home_banner_top_margin">30dp</dimen>
+<dimen name="booking_banner_margin_small">10dp</dimen>
+<dimen name="booking_banner_margin">14dp</dimen>
+
+<!-- padding -->
+<dimen name="common_padding_tiny">3dp</dimen>
+<dimen name="common_padding_small">5dp</dimen>
+<dimen name="common_padding_medium">8dp</dimen>
+<dimen name="common_padding">10dp</dimen>
+<dimen name="common_padding_content_small">8dp</dimen>
+<dimen name="common_padding_content">16dp</dimen>
+<dimen name="common_padding_large">25dp</dimen>
+<dimen name="common_padding_huge">40dp</dimen>
+<dimen name="padding_bottom_sheet">10dp</dimen>
+<dimen name="padding_button">18dp</dimen>
+<dimen name="padding_rating_bar">0dp</dimen>
+<dimen name="padding_toolbar_image_title">12dp </dimen>
+
+<!-- font size -->
+<dimen name="common_font_tiny">9sp</dimen>
+<dimen name="common_font_small">11sp</dimen>
+<dimen name="common_font">13sp</dimen>
+<dimen name="common_font_mid_medium">14sp</dimen>
+<dimen name="common_font_medium">15sp</dimen>
+<dimen name="common_font_mid_large">16sp</dimen>
+<dimen name="common_font_large">17sp</dimen>
+<dimen name="common_font_title">18sp</dimen>
+<dimen name="common_font_huge">21sp</dimen>
+<dimen name="common_font_input">14sp</dimen>
+<dimen name="rating_font">40sp</dimen>
+<dimen name="bottom_navigation_font">9sp</dimen>
+<dimen name="home_banner_title_font">21sp</dimen>
+<dimen name="home_banner_msg_font">13sp</dimen>
+<dimen name="calendar_month_font">23sp</dimen>
+
+<!-- corner radius -->
+<dimen name="common_corner_radius_tiny">2dp</dimen>
+<dimen name="common_corner_radius_small">5dp</dimen>
+<dimen name="common_corner_radius">10dp</dimen>
+<dimen name="common_corner_radius_medium">15dp</dimen>
+<dimen name="common_corner_radius_large">20dp</dimen>
+
+<!-- shadow -->
+<dimen name="commen_shadow_radius">8dp</dimen>
+
+<!-- button size -->
+<dimen name="common_button_height">40dp</dimen>
+<dimen name="common_button_width_single">200dp</dimen>
+
+<!-- tab -->
+<dimen name="tab_indicator_height">4dp</dimen>
+
+<!-- image size -->
+<dimen name="toolbar_image_title_height">30dp</dimen>
+<dimen name="menu_logo_width">200dp</dimen>
+<dimen name="home_property_image_width">300dp</dimen>
+<dimen name="property_image_width_small">250dp</dimen>
+<dimen name="home_sold_image_width">80dp</dimen>
+<dimen name="home_sold_image_height">80dp</dimen>
+<dimen name="sold_image_width_small">70dp</dimen>
+<dimen name="sold_image_height_small">70dp</dimen>
+<dimen name="dialog_image_width_small">40dp</dimen>
+<dimen name="dialog_image_height_small">40dp</dimen>
+<dimen name="dialog_image_width">50dp</dimen>
+<dimen name="dialog_image_height">50dp</dimen>
+<dimen name="dialog_image_width_common">60dp</dimen>
+<dimen name="dialog_image_height_common">60dp</dimen>
+<dimen name="icon_common_width_small">20dp</dimen>
+<dimen name="icon_common_height_small">20dp</dimen>
+<dimen name="icon_common_width_medium">25dp</dimen>
+<dimen name="icon_common_height_medium">25dp</dimen>
+<dimen name="icon_common_width">30dp</dimen>
+<dimen name="icon_common_height">30dp</dimen>
+<dimen name="icon_common_width_intermediate">35dp</dimen>
+<dimen name="icon_common_height_intermediate">35dp</dimen>
+<dimen name="icon_common_width_big">40dp</dimen>
+<dimen name="icon_common_height_big">40dp</dimen>
+<dimen name="icon_common_width_large">100dp</dimen>
+<dimen name="icon_common_height_large">100dp</dimen>
+<dimen name="icon_more_vert_horiz_size">17dp</dimen>
+<dimen name="menu_profile_image_width">100dp</dimen>
+<dimen name="menu_profile_image_height">100dp</dimen>
+<dimen name="profile_image_width">100dp</dimen>
+<dimen name="profile_image_height">100dp</dimen>
+<dimen name="profile_image_background_height">140dp</dimen>
+<dimen name="icon_no_data_width_small">80dp</dimen>
+<dimen name="icon_no_data_height_small">80dp</dimen>
+<dimen name="icon_no_data_width">150dp</dimen>
+<dimen name="icon_no_data_height">150dp</dimen>
+<dimen name="list_item_image_width">70dp</dimen>
+<dimen name="list_item_image_height">70dp</dimen>
+<dimen name="list_icon_width">10dp</dimen>
+<dimen name="list_icon_height">10dp</dimen>
+<dimen name="edittext_icon_width">16dp</dimen>
+<dimen name="edittext_icon_height">16dp</dimen>
+<dimen name="property_message_image_min_height">100dp</dimen>
+<dimen name="side_menu_badge_width">8dp</dimen>
+<dimen name="side_menu_badge_height">8dp</dimen>
+<dimen name="home_explore_item_width">140dp</dimen>
+<dimen name="home_product_item_width">150dp</dimen>
+<dimen name="topup_package_item_width">140dp</dimen>
+<dimen name="booking_step_view_line_max_width">20dp</dimen>
+
+<!-- map -->
+<dimen name="common_map_height">200dp</dimen>
+
+<!-- card view -->
+<dimen name="card_elevation_small">2dp</dimen>
+<dimen name="card_elevation">5dp</dimen>
+
+<!-- circle image view border -->
+<dimen name="circle_image_view_border">2dp</dimen>
+<dimen name="circle_image_view_padding">3dp</dimen>
+
+<!-- view pager indicator -->
+<dimen name="viewpager_indicator_dot">6dp</dimen>
+
+<!-- total payment space -->
+<dimen name="total_payment_space">100dp</dimen>
+<dimen name="total_payment_mobile_booking_space">300dp</dimen>
+
+<!-- float -->
+<item name="app_logo_width_percent" format="float" type="dimen">0.7</item>
+<item name="home_profile_image_width_percent" format="float" type="dimen">0.15</item>
+<item name="home_app_logo_width_percent" format="float" type="dimen">0.12</item>
+<item name="product_image_width_percent" format="float" type="dimen">0.6</item>
+<item name="outlet_image_width_percent" format="float" type="dimen">0.2</item>
+<item name="car_image_width_percent" format="float" type="dimen">0.2</item>
+<item name="cart_product_image_width_percent" format="float" type="dimen">0.2</item>
+<item name="booking_product_image_width_percent" format="float" type="dimen">0.2</item>
+<item name="home_profile_image_setting_width_percent" format="float" type="dimen">0.07</item>
+<item name="button_width_percent" format="float" type="dimen">0.6</item>
+<item name="profile_page_user_image_width_percent" format="float" type="dimen">0.25</item>
+<item name="list_image_width_percent" format="float" type="dimen">0.15</item>
+<item name="chat_image_width_percent" format="float" type="dimen">0.08</item>
+<item name="list_status_width_percent" format="float" type="dimen">0.03</item>
+<item name="no_data_image_width_percent" format="float" type="dimen">0.2</item>
+<item name="empty_data_lottie_width_percent" format="float" type="dimen">0.6</item>
+<item name="dialog_image_message_width_percent" format="float" type="dimen">0.7</item>
+<item name="add_car_image_logo_width_percent" format="float" type="dimen">0.5</item>
+<item name="booking_step_view_line_width_percent" format="float" type="dimen">0.06</item>
+<item name="pecman_master_image_width_percent" format="float" type="dimen">0.15</item>
+<item name="empty_cart_width_percent" format="float" type="dimen">0.55</item>
+<item name="empty_data_width_percent" format="float" type="dimen">0.55</item>
+<item name="otp_aspect_ratio" format="string" type="dimen">4:5</item>
+<item name="sold_banner_width_percent" format="float" type="dimen">0.25</item>
+<item name="gallery_image_aspect_ratio" format="string" type="dimen">5:4</item>
+<item name="chat_attachment_width_percent" format="float" type="dimen">0.12</item>
+<item name="home_image_aspect_ratio" format="string" type="dimen">16:7</item>
+<item name="home_product_aspect_ratio" format="string" type="dimen">5:4</item>
+<item name="booking_product_aspect_ratio" format="string" type="dimen">5:3</item>
+<item name="service_details_aspect_ratio" format="string" type="dimen">5:3</item>
+<item name="outlet_image_aspect_ratio" format="string" type="dimen">16:9</item>
+<item name="outlet_aspect_ratio" format="string" type="dimen">7:5</item>
+<item name="outlet_map_ratio" format="string" type="dimen">7:4</item>
+<item name="mobile_wash_booking_map_ratio" format="string" type="dimen">8:9</item>
+<item name="car_wash_service_ratio" format="string" type="dimen">2:3</item>
+<item name="service_details_image_aspect_ratio" format="string" type="dimen">16:9</item>
+<item name="topup_package_item_aspect_ratio" format="string" type="dimen">7:8</item>
+<item name="car_detail_image_aspect_ratio" format="string" type="dimen">16:9</item>
 </resources>

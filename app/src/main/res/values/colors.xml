@@ -7,4 +7,67 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#043353</color>
+    <color name="colorPrimaryDark">#000b2a</color>
+    <color name="colorAccent">#3a5c80</color>
+    <color name="colorPrimaryRipple">#40043353</color>
+
+    <color name="colorBackground">#f9f9f9</color>
+    <color name="colorBlue1">#449fd6</color>
+    <color name="colorBlue2">#0b5c93</color>
+    <color name="colorBlue3">#4a7dbf</color>
+    <color name="colorMainGrey">#bfbfbf</color>
+    <color name="colorMainGreyRipple">#33bfbfbf</color>
+
+    <!-- common color -->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhiteDarker">#fcfdff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorLightBlack">#53575A</color>
+    <color name="colorLightGrey">#E5E5E5</color>
+    <color name="colorGrey">#cacaca</color>
+    <color name="colorDarkGrey">#868686</color>
+    <color name="colorRed">#BF4A4A</color>
+    <color name="colorDarkRed">#c24547</color>
+    <color name="colorDarkBlue">#20324E</color>
+    <color name="colorLightBlue">#83AEEA</color>
+    <color name="colorBlue">#449fd6</color>
+    <color name="colorBlue5">#0D01BAF3</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorTransparentBlack">#B3000000</color>
+    <color name="colorTransparentLightBlack">#66000000</color>
+    <color name="colorLightSilver">#f2f2f2</color>
+    <color name="colorTransparentBlue">#E601BAF3</color>
+    <color name="colorPink">#F171B0</color>
+    <color name="colorLightGreen">#41C4A2</color>
+    <color name="colorPurple">#8C31B9</color>
+    <color name="colorOrange">#FF7921</color>
+    <color name="colorYellow">#FFC42C</color>
+    <color name="colorGreen">#2E9021</color>
+    <color name="colorBackgroundDeleteImage">#ccff0000</color>
+    <color name="colorBackgroundTotal">#D3DDE6</color>
+    <color name="colorBackgroundTransaction">#F3F5F7</color>
+    <color name="colorFacebook">#3b5998</color>
+    <color name="colorGoogle">#4285f4</color>
+
+    <!-- chat -->
+    <color name="colorSystemMessageBackground">#FFCA98</color>
+    <color name="colorMessageReceivedBackground">#E9E9E9</color>
+    <color name="colorMessageSentBackground">#B4D3FF</color>
+
+    <!-- common text color -->
+    <color name="colorTextBlack">#000000</color>
+    <color name="colorTextLightBlack">#666666</color>
+    <color name="colorTextGrey">#999999</color>
+    <color name="colorTextPending">#f9bb14</color>
+    <color name="colorError">#fa0e0e</color>
+
+    <!-- status -->
+    <color name="colorActive">#31d912</color>
+    <color name="colorReject">#ff0000</color>
+    <color name="colorPending">#ffc20f</color>
+    <color name="colorPositive">#01BAF3</color>
+    <color name="colorNegative">#a3a3a3</color>
+
 </resources>
+

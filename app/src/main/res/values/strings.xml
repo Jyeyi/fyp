@@ -10,4 +10,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_user_register">user_register</string>
+    <string name="to_location">To: %s</string>
+    <string name="from_location">From: %s</string>
+    <string name="own_ticket_list">Own Ticket List</string>
 </resources>

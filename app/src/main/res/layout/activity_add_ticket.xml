@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:clickable="true">
+
+    <include
+        android:id="@+id/included_toolbar"
+        layout="@layout/toolbar_view"
+        app:layout_constraintBottom_toTopOf="@+id/sv_content"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/ll_bottom"
+        app:layout_constraintTop_toBottomOf="@+id/included_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- image -->
+            <LinearLayout
+                android:id="@+id/ll_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:elevation="@dimen/card_elevation_small"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/common_padding_small"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_upload_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_margin_medium"
+                    android:layout_marginTop="@dimen/common_margin_large"
+                    android:layout_marginEnd="@dimen/common_margin_medium"
+                    android:layout_marginBottom="@dimen/common_margin_large"
+                    android:text="Upload Image"
+                    android:textColor="@color/colorBlue3"
+                    android:textSize="@dimen/common_font_mid_large" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_car"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="@dimen/common_margin_medium"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_upload"
+                        app:layout_constraintDimensionRatio="@dimen/car_detail_image_aspect_ratio"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_image_logo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_image"
+                        app:layout_constraintBottom_toTopOf="@+id/btn_upload"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="@dimen/add_car_image_logo_width_percent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/common_margin_huge"
+                        android:backgroundTint="@color/colorBlue3"
+                        android:fontFamily="@font/poppins_semi_bold"
+                        android:paddingLeft="@dimen/common_padding_large"
+                        android:paddingTop="@dimen/common_padding"
+                        android:paddingRight="@dimen/common_padding_large"
+                        android:paddingBottom="@dimen/common_padding"
+                        android:text="Upload"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/common_font_input"
+                        app:cornerRadius="@dimen/common_corner_radius"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+            <!-- end image -->
+
+            <!-- car details -->
+            <LinearLayout
+                android:id="@+id/ll_car_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:background="@color/colorWhite"
+                android:elevation="@dimen/card_elevation_small"
+                android:orientation="vertical"
+                android:padding="@dimen/common_padding_large"
+                android:visibility="visible">
+
+                <!-- car model -->
+                <TextView
+                    android:id="@+id/tv_car_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Car Model"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <EditText
+                    android:id="@+id/edt_car_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:inputType="text"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/common_font_mid_large" />
+                <!-- end car model -->
+
+                <!-- car plate -->
+                <TextView
+                    android:id="@+id/tv_car_plate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_large"
+                    android:text="Car Plate Number"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <EditText
+                    android:id="@+id/edt_car_plate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:inputType="text"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/common_font_mid_large" />
+                <!-- end car plate -->
+
+                <!-- color -->
+                <TextView
+                    android:id="@+id/tv_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_large"
+                    android:text="Color"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <EditText
+                    android:id="@+id/edt_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:inputType="text"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/common_font_mid_large" />
+                <!-- end color -->
+
+                <!-- year -->
+                <TextView
+                    android:id="@+id/tv_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_margin"
+                    android:layout_marginTop="@dimen/common_margin_large"
+                    android:layout_marginEnd="@dimen/common_margin"
+                    android:text="Year"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <EditText
+                    android:id="@+id/edt_year"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:inputType="number"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/common_font_mid_large" />
+                <!-- end year -->
+
+            </LinearLayout>
+            <!-- end car details -->
+
+            <!-- car diary -->
+            <LinearLayout
+                android:id="@+id/ll_car_diary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_margin"
+                android:layout_marginBottom="@dimen/common_margin_large"
+                android:background="@color/colorWhite"
+                android:elevation="@dimen/card_elevation_small"
+                android:orientation="vertical"
+                android:padding="@dimen/common_padding_large">
+
+                <TextView
+                    android:id="@+id/tv_car_diary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/common_margin_large"
+                    android:text="Car Diary"
+                    android:textColor="@color/colorBlue3"
+                    android:textSize="@dimen/common_font_mid_large" />
+
+                <!-- road tax expiry -->
+                <TextView
+                    android:id="@+id/tv_roadtax_expiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Road Tax Expired Date"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_road_tax_expiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_transparent_ripple_corner_radius"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/edt_road_tax_expiry"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:background="@null"
+                            android:padding="@dimen/common_padding"
+                            android:textColor="@color/colorTextBlack"
+                            android:textColorHint="@color/colorMainGrey"
+                            android:textSize="@dimen/common_font_mid_large" />
+
+                        <ImageView
+                            android:layout_width="@dimen/edittext_icon_width"
+                            android:layout_height="@dimen/edittext_icon_height"
+                            android:layout_marginLeft="@dimen/common_margin"
+                            android:layout_marginRight="@dimen/common_margin_large"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="@color/colorPrimary" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- end road tax expiry -->
+
+                <!-- maintenance expire -->
+                <TextView
+                    android:id="@+id/tv_maintenance_expiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_large"
+                    android:text="Maintenance Expired Date"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_maintenance_expiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_transparent_ripple_corner_radius"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/edt_maintenance_expiry"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:padding="@dimen/common_padding"
+                            android:textColor="@color/colorTextBlack"
+                            android:textColorHint="@color/colorMainGrey"
+                            android:textSize="@dimen/common_font_mid_large" />
+
+                        <ImageView
+                            android:layout_width="@dimen/edittext_icon_width"
+                            android:layout_height="@dimen/edittext_icon_height"
+                            android:layout_marginLeft="@dimen/common_margin"
+                            android:layout_marginRight="@dimen/common_margin_large"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="@color/colorPrimary" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- end maintenance expiry -->
+
+                <!-- license expiry -->
+                <TextView
+                    android:id="@+id/tv_license_expiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_large"
+                    android:text="Car Lisense Expired Date"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_license_expiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_transparent_ripple_corner_radius"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/edt_license_expiry"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:padding="@dimen/common_padding"
+                            android:textColor="@color/colorTextBlack"
+                            android:textColorHint="@color/colorMainGrey"
+                            android:textSize="@dimen/common_font_mid_large" />
+
+                        <ImageView
+                            android:layout_width="@dimen/edittext_icon_width"
+                            android:layout_height="@dimen/edittext_icon_height"
+                            android:layout_marginLeft="@dimen/common_margin"
+                            android:layout_marginRight="@dimen/common_margin_large"
+                            android:src="@drawable/ic_calendar"
+                            app:tint="@color/colorPrimary" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- end license expiry -->
+
+            </LinearLayout>
+            <!-- end car diary -->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_top_grey"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/common_padding_content"
+        android:paddingTop="@dimen/common_padding"
+        android:paddingEnd="@dimen/common_padding_content"
+        android:paddingBottom="@dimen/common_padding"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sv_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:padding="@dimen/common_padding"
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/common_font_large"
+            app:cornerRadius="@dimen/common_corner_radius" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,7 @@ public class user_page extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.home);
+        bottomNavigationView.setSelectedItemId(R.id.setting);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -28,7 +28,7 @@ public class user_page extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.ticket:
-                        startActivity(new Intent(getApplicationContext(), test.class));
+                        startActivity(new Intent(getApplicationContext(), activity_own_ticket.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.home:
