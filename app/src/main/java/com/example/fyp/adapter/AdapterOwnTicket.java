@@ -52,22 +52,14 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
         holder.tv_departureDate.setText(ticketModel.getDepartureTime());
         holder.tv_fromLocation.setText(ticketModel.getFromLocation());
         holder.tv_toLocation.setText(ticketModel.getToLocation());
-        //        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(mListener != null){
-//                    mListener.onItemClick(position);
-//                }
-//            }
-//        });
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mListener.onItemClick(position, TYPE_CUSTOMER);
-//                //context.startActivity(new Intent(context, AdminUserEditActivity.class));
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onItemClick(position);
+                //context.startActivity(new Intent(context, AdminUserEditActivity.class));
+            }
+        });
 
     }
 
@@ -94,19 +86,12 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
             tv_toLocation = itemView.findViewById(R.id.tv_ticket_to);
             tv_fromLocation = itemView.findViewById(R.id.tv_ticket_from);
 
-            // btnDelete = itemView.findViewById(R.id.btn_delete);
-
-
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    mListener.onItemClick(getAdapterPosition());
-//                }
-//            });
         }
     }
 
     public interface ItemClickListener{
-        void onItemClick(int position, String viewType);
+        void onItemClick(int position);
     }
+
+
 }

@@ -12,5 +12,16 @@
     <string name="title_activity_user_register">user_register</string>
     <string name="to_location">To: %s</string>
     <string name="from_location">From: %s</string>
+    <string name="ticket_id">Bus ID</string>
+    <string name="bus_plate_no">Bus Plate No</string>
+    <string name="departure_time">Departure Time</string>
+    <string name="departure_date">Departure Date</string>
+    <string name="arrived_time">Arrive Time</string>
+    <string name="arrived_date">Arrive Date</string>
+    <string name="company_name">Company Name</string>
+    <string name="ticket_price">Ticket Price</string>
+    <string name="ticket_stage">Stage</string>
     <string name="own_ticket_list">Own Ticket List</string>
+
+
 </resources>

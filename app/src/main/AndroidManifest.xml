@@ -19,6 +19,9 @@
         <activity android:name=".register" />
         <activity android:name=".user_page" />
         <activity android:name=".activity_own_ticket" />
+        <activity android:name=".activity_user_add_ticket" />
+
+
         <activity
             android:name=".MainActivity"
             android:label="BTRMA"
