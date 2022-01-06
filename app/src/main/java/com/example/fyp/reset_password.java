@@ -62,6 +62,23 @@ public class reset_password extends AppCompatActivity {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2login = new Intent(reset_password.this, MainActivity.class);
+                startActivity(intent2login);
+                finish();
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2register = new Intent(reset_password.this, register.class);
+                startActivity(intent2register);
+                finish();
+            }
+        });
 
     }
 }
