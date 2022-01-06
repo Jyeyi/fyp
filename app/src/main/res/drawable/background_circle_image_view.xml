@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:bottom="@dimen/circle_image_view_border"
+        android:left="@dimen/circle_image_view_border"
+        android:right="@dimen/circle_image_view_border"
+        android:top="@dimen/circle_image_view_border">
+        <shape android:shape="oval" >
+            <stroke
+                android:width="@dimen/circle_image_view_border"
+                android:color="@color/colorLightGrey" />
+
+        </shape>
+    </item>
+</layer-list>
