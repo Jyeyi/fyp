@@ -3,25 +3,21 @@ package com.example.fyp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.fyp.adapter.AdapterOwnTicket;
 import com.example.fyp.model.TicketModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public  class activity_own_ticket extends AppCompatActivity{
+public class activity_ticket_history extends AppCompatActivity {
 
     private RecyclerView recyclerViewOwnTicket;
     private DatabaseReference databaseReference;
@@ -32,8 +28,7 @@ public  class activity_own_ticket extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_own_ticket);
-
+        setContentView(R.layout.activity_ticket_history);
 
         for (int i = 0; i < 5; i++) {
             TicketModel ticket = new TicketModel();
@@ -46,20 +41,10 @@ public  class activity_own_ticket extends AppCompatActivity{
             ticket.setAdultTicket(true);
             ticketModelArrayList.add(ticket);
         }
-
         setupView();
         setupAdapter();
         setupNavigationBar();
-
-        fabAddTicket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity_own_ticket.this, activity_user_add_ticket.class);
-                startActivity(intent);
-            }
-        });
     }
-
     void setupView() {
         recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
         fabAddTicket = findViewById(R.id.fab);
@@ -75,7 +60,7 @@ public  class activity_own_ticket extends AppCompatActivity{
 
     void setupNavigationBar() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.ticket);
+        bottomNavigationView.setSelectedItemId(R.id.purchase);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

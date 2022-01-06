@@ -1,11 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BCF1F8"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
     tools:context=".user_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/tv_from_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/common_font_medium" />
+
+        <LinearLayout
+            android:id="@+id/ll_from_location"
+            android:layout_below="@+id/tv_from_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:background="@drawable/common_input_box"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_transparent_ripple_corner_radius"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edt_from_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:background="@null"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textColorHint="@color/colorMainGrey"
+                    android:textSize="@dimen/common_font_mid_large" />
+
+                <ImageView
+                    android:layout_width="@dimen/edittext_icon_width"
+                    android:layout_height="@dimen/edittext_icon_height"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin_large"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_to_location_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:layout_below="@+id/ll_from_location"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/common_font_medium" />
+
+        <LinearLayout
+            android:id="@+id/ll_to_location_title"
+            android:layout_below="@+id/tv_to_location_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:background="@drawable/common_input_box"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_to_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_transparent_ripple_corner_radius"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edt_to_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:background="@null"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textColorHint="@color/colorMainGrey"
+                    android:textSize="@dimen/common_font_mid_large" />
+
+                <ImageView
+                    android:layout_width="@dimen/edittext_icon_width"
+                    android:layout_height="@dimen/edittext_icon_height"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin_large"
+                    android:src="@drawable/ic_location"
+                    app:tint="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_departure_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/departure_date"
+            android:layout_marginStart="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/common_margin"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/common_font_medium"
+            android:layout_below="@id/ll_to_location_title"/>
+
+        <LinearLayout
+            android:id="@+id/ll_departure_date_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:background="@drawable/common_input_box"
+            android:orientation="horizontal"
+            android:layout_below="@id/tv_departure_date">
+
+            <LinearLayout
+                android:id="@+id/ll_departure_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_transparent_ripple_corner_radius"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edt_departure_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:background="@null"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textColorHint="@color/colorMainGrey"
+                    android:textSize="@dimen/common_font_mid_large" />
+
+                <ImageView
+                    android:layout_width="@dimen/edittext_icon_width"
+                    android:layout_height="@dimen/edittext_icon_height"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:layout_marginRight="@dimen/common_margin_large"
+                    android:src="@drawable/ic_calendar"
+                    app:tint="@color/colorPrimary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:padding="@dimen/common_padding"
+            android:text="Search for Bus"
+            android:backgroundTint="@null"
+            android:background="@drawable/background_border_blue"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/common_font_large"
+            app:cornerRadius="@dimen/common_corner_radius"
+            android:layout_below="@id/ll_departure_date_title"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewOwnTicket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_own_ticket"
+            android:layout_below="@id/btn_save"
+            />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,4 +204,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

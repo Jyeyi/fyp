@@ -39,7 +39,7 @@ public class user_main extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.purchase:
-                        startActivity(new Intent(getApplicationContext(), user_profile.class));
+                        startActivity(new Intent(getApplicationContext(), activity_ticket_history.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.ticket:

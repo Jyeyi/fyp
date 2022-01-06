@@ -14,10 +14,14 @@
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/drawable/setting.xml" value="0.19282051282051282" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/drawable/shadow.xml" value="0.1" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_add_ticket.xml" value="0.1" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_history_ticket_details.xml" value="0.1859375" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_home.xml" value="0.16" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_main.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_own_ticket.xml" value="0.176" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_purchase_ticket_details.xml" value="0.1859375" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_register.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_ticket_details.xml" value="0.176" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_ticket_history.xml" value="0.1859375" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_user_add_ticket.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_user_main.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/fyp/app/src/main/res/layout/activity_user_page.xml" value="0.1" />

@@ -317,31 +317,5 @@
 
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/ll_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border_top_grey"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/common_padding_content"
-        android:paddingTop="@dimen/common_padding"
-        android:paddingEnd="@dimen/common_padding_content"
-        android:paddingBottom="@dimen/common_padding"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_content">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:padding="@dimen/common_padding"
-            android:text="Edit Details"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/common_font_large"
-            app:cornerRadius="@dimen/common_corner_radius" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

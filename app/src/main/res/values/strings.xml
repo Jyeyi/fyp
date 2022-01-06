@@ -22,6 +22,8 @@
     <string name="ticket_price">Ticket Price</string>
     <string name="ticket_stage">Stage</string>
     <string name="own_ticket_list">Own Ticket List</string>
+    <string name="ticket_history">Ticket History</string>
+
 
 
 </resources>
