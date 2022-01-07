@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BCF1F8"
-    tools:context=".user_profile">
-
+    tools:context=".user_edit_profile">
 
     <TextView
         android:layout_width="347dp"
