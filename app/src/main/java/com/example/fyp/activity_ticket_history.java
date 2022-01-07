@@ -2,6 +2,7 @@ package com.example.fyp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.fyp.adapter.AdapterOwnTicket;
@@ -17,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class activity_ticket_history extends AppCompatActivity {
+public class activity_ticket_history extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener{
 
     private RecyclerView recyclerViewOwnTicket;
     private DatabaseReference databaseReference;
@@ -30,13 +31,18 @@ public class activity_ticket_history extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_history);
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             TicketModel ticket = new TicketModel();
             ticket.setTicketID("sgsggs");
-            ticket.setCompanyName("cepatExpress");
+            if(i % 2 != 0){
+                ticket.setCompanyName("cepatExpress");
+            } else {
+                ticket.setCompanyName("slowExpress");
+            }
+
             ticket.setToLocation("chaah");
             ticket.setFromLocation("jb");
-            ticket.setDepartureTime("2PM 12/1/2022");
+            ticket.setDepartureTime("12/1/2022 2PM");
             ticket.setTicketID("121212");
             ticket.setAdultTicket(true);
             ticketModelArrayList.add(ticket);
@@ -54,7 +60,7 @@ public class activity_ticket_history extends AppCompatActivity {
         recyclerViewOwnTicket.setHasFixedSize(true);
         recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
 
-        adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList);
+        adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList, this);
         recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
     }
 
@@ -85,5 +91,11 @@ public class activity_ticket_history extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Log.d("try", ticketModelArrayList.get(position).getCompanyName());
+        System.out.print(ticketModelArrayList.get(position).getCompanyName());
     }
 }

@@ -25,13 +25,15 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_own_ticket"
         android:layout_below="@id/tv_ticket_title"
+        android:layout_above="@id/ll_nav"
         />
 
     <LinearLayout
         android:id="@+id/ll_nav"
         android:orientation="vertical"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:gravity="bottom">
 

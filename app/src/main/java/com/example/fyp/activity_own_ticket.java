@@ -2,10 +2,13 @@ package com.example.fyp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.fyp.adapter.AdapterOwnTicket;
+import com.example.fyp.databinding.ToolbarViewBinding;
 import com.example.fyp.model.TicketModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,7 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public  class activity_own_ticket extends AppCompatActivity{
+public  class activity_own_ticket extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener{
 
     private RecyclerView recyclerViewOwnTicket;
     private DatabaseReference databaseReference;
@@ -35,10 +38,14 @@ public  class activity_own_ticket extends AppCompatActivity{
         setContentView(R.layout.activity_own_ticket);
 
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             TicketModel ticket = new TicketModel();
             ticket.setTicketID("sgsggs");
-            ticket.setCompanyName("cepatExpress");
+            if(i % 2 != 0){
+                ticket.setCompanyName("cepatExpress");
+            } else {
+                ticket.setCompanyName("slowExpress");
+            }
             ticket.setToLocation("chaah");
             ticket.setFromLocation("jb");
             ticket.setDepartureTime("2PM 12/1/2022");
@@ -60,6 +67,8 @@ public  class activity_own_ticket extends AppCompatActivity{
         });
     }
 
+
+
     void setupView() {
         recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
         fabAddTicket = findViewById(R.id.fab);
@@ -69,7 +78,9 @@ public  class activity_own_ticket extends AppCompatActivity{
         recyclerViewOwnTicket.setHasFixedSize(true);
         recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
 
-        adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList);
+        adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList, this);
+
+
         recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
     }
 
@@ -100,5 +111,12 @@ public  class activity_own_ticket extends AppCompatActivity{
                 return false;
             }
         });
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+        Log.d("try", ticketModelArrayList.get(position).getCompanyName());
+        System.out.print(ticketModelArrayList.get(position).getCompanyName());
     }
 }

@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:textColor="#000000"
         android:textSize="20dp"/>
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="IC Number"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:textColor="#000000"
         android:textSize="20dp"/>
 
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:text="Email"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:textColor="#000000"
         android:textSize="20dp"/>
 
@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:text="Phone Number"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:textColor="#000000"
         android:textSize="20dp"/>
 
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:text="Password"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:textColor="#000000"
         android:textSize="20dp"/>
 
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:text="Confirm Password"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
         android:textColor="#000000"
         android:textSize="20dp"/>
 

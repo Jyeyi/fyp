@@ -40,7 +40,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <EditText
                     android:id="@+id/edt_from_location"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <EditText
                     android:id="@+id/edt_to_location"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -165,25 +165,24 @@
             android:id="@+id/btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/ll_departure_date_title"
+            android:background="@drawable/background_border_blue"
+            android:backgroundTint="@null"
             android:fontFamily="@font/poppins_semi_bold"
             android:padding="@dimen/common_padding"
             android:text="Search for Bus"
-            android:backgroundTint="@null"
-            android:background="@drawable/background_border_blue"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/common_font_large"
-            app:cornerRadius="@dimen/common_corner_radius"
-            android:layout_below="@id/ll_departure_date_title"/>
+            app:cornerRadius="@dimen/common_corner_radius" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewOwnTicket"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/btn_save"
             android:layout_marginVertical="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_own_ticket"
-            android:layout_below="@id/btn_save"
-            />
+            tools:listitem="@layout/item_own_ticket" />
 
     </RelativeLayout>
 

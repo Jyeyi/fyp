@@ -99,13 +99,13 @@
                     android:textSize="@dimen/common_font_mid_large" />
                 <!-- end car plate -->
 
-                <!-- color -->
+                <!-- from location -->
                 <TextView
                     android:id="@+id/tv_from_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/common_margin_large"
-                    android:text="@string/to_location"
+                    android:text="@string/from_location_title"
                     android:textColor="@color/colorPrimary"
                     android:layout_marginStart="@dimen/common_margin"
                     android:layout_marginEnd="@dimen/common_margin"
@@ -113,6 +113,31 @@
 
                 <EditText
                     android:id="@+id/edt_from_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin"
+                    android:layout_marginBottom="@dimen/common_margin"
+                    android:background="@drawable/common_input_box"
+                    android:inputType="text"
+                    android:padding="@dimen/common_padding"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/common_font_mid_large" />
+                <!-- to location -->
+
+                <!-- color -->
+                <TextView
+                    android:id="@+id/tv_to_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_margin_large"
+                    android:text="@string/to_location_title"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginStart="@dimen/common_margin"
+                    android:layout_marginEnd="@dimen/common_margin"
+                    android:textSize="@dimen/common_font_medium" />
+
+                <EditText
+                    android:id="@+id/edt_to_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/common_margin"

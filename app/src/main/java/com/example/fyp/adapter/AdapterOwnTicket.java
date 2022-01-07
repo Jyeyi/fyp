@@ -23,10 +23,10 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
     private ItemClickListener mListener;
 
     //constructor
-    public AdapterOwnTicket(Context context, ArrayList<TicketModel> ticketModels) {
+    public AdapterOwnTicket(Context context, ArrayList<TicketModel> ticketModels, ItemClickListener listener) {
         this.context = context;
         this.ticketModelArrayList = ticketModels;
-//        this.mListener = listener;
+        this.mListener = listener;
     }
 
     @NonNull
