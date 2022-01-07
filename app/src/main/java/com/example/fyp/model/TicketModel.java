@@ -6,24 +6,29 @@ public class TicketModel {
     private String toLocation;
     private String fromLocation;
     private String departureTime;
+    private String departureDate;
     private String arrivedTime;
+    private String arrivedDate;
     private String companyName;
     private String ticketPrice;
-    private Boolean adultTicket;
+    private String stage;
 
-    public TicketModel(String ticketID, String busPlateNumber, String toLocation, String fromLocation, String departureTime, String arrivedTime, String companyName, String ticketPrice, Boolean adultTicket) {
+
+    public TicketModel() {
+    }
+
+    public TicketModel(String ticketID, String busPlateNumber, String toLocation, String fromLocation, String departureTime, String departureDate, String arrivedTime, String arrivedDate, String companyName, String ticketPrice, String stage) {
         this.ticketID = ticketID;
         this.busPlateNumber = busPlateNumber;
         this.toLocation = toLocation;
         this.fromLocation = fromLocation;
         this.departureTime = departureTime;
+        this.departureDate = departureDate;
         this.arrivedTime = arrivedTime;
+        this.arrivedDate = arrivedDate;
         this.companyName = companyName;
         this.ticketPrice = ticketPrice;
-        this.adultTicket = adultTicket;
-    }
-
-    public TicketModel() {
+        this.stage = stage;
     }
 
     public String getTicketID() {
@@ -66,12 +71,28 @@ public class TicketModel {
         this.departureTime = departureTime;
     }
 
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
+    }
+
     public String getArrivedTime() {
         return arrivedTime;
     }
 
     public void setArrivedTime(String arrivedTime) {
         this.arrivedTime = arrivedTime;
+    }
+
+    public String getArrivedDate() {
+        return arrivedDate;
+    }
+
+    public void setArrivedDate(String arrivedDate) {
+        this.arrivedDate = arrivedDate;
     }
 
     public String getCompanyName() {
@@ -90,11 +111,11 @@ public class TicketModel {
         this.ticketPrice = ticketPrice;
     }
 
-    public Boolean getAdultTicket() {
-        return adultTicket;
+    public String getStage() {
+        return stage;
     }
 
-    public void setAdultTicket(Boolean adultTicket) {
-        this.adultTicket = adultTicket;
+    public void setStage(String stage) {
+        this.stage = stage;
     }
 }

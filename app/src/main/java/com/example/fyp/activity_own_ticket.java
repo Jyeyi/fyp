@@ -24,6 +24,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
+
 public  class activity_own_ticket extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener{
 
     private RecyclerView recyclerViewOwnTicket;
@@ -50,7 +52,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
             ticket.setFromLocation("jb");
             ticket.setDepartureTime("2PM 12/1/2022");
             ticket.setTicketID("121212");
-            ticket.setAdultTicket(true);
             ticketModelArrayList.add(ticket);
         }
 
@@ -68,7 +69,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
     }
 
 
-
     void setupView() {
         recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
         fabAddTicket = findViewById(R.id.fab);
@@ -79,8 +79,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
         recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
 
         adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList, this);
-
-
         recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
     }
 
@@ -116,7 +114,11 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
 
     @Override
     public void onItemClick(int position) {
-        Log.d("try", ticketModelArrayList.get(position).getCompanyName());
-        System.out.print(ticketModelArrayList.get(position).getCompanyName());
+        Intent intent = new Intent(this, activity_ticket_details.class);
+//        intent.putExtra(IN,ticketModelArrayList.get(position).getTicketID());
+//        intent.putExtra()
+//        intent.putExtra(INTENT_ID,tncArrayList.get(position).getId());
+//        startActivityForResult(intent,START_FOR_RESULT);
+        overridePendingTransition(0, 0);
     }
 }
