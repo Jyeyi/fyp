@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class user_profile extends AppCompatActivity {
 
-    private EditText name, birth, phone, ic, email, gender;
+    private EditText name, phone, ic, email;
     private Button save;
 
     private FirebaseAuth auth;
@@ -30,26 +30,22 @@ public class user_profile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_main);
+        setContentView(R.layout.activity_user_profile);
 
         name = findViewById(R.id.et_name);
-        birth = findViewById(R.id.et_birthday);
         phone = findViewById(R.id.et_phone);
         ic = findViewById(R.id.et_ic);
         email = findViewById(R.id.et_email);
-        gender = findViewById(R.id.et_gender);
         save = findViewById(R.id.bt_save);
-
-        name.setText(getIntent().getStringExtra("name1").toString());
-        birth.setText(getIntent().getStringExtra("birth1").toString());
-        phone.setText(getIntent().getStringExtra("phone1").toString());
-        ic.setText(getIntent().getStringExtra("ic1").toString());
-        email.setText(getIntent().getStringExtra("email1").toString());
-        gender.setText(getIntent().getStringExtra("gender1").toString());
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         dbref = db.getReference("Users");
+
+        name.setText(getIntent().getStringExtra("name").toString());
+        phone.setText(getIntent().getStringExtra("phone").toString());
+        ic.setText(getIntent().getStringExtra("ic").toString());
+        email.setText(getIntent().getStringExtra("email").toString());
 
         dbref.addChildEventListener(new ChildEventListener() {
             @Override
@@ -57,24 +53,21 @@ public class user_profile extends AppCompatActivity {
                 save.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (name.getText().length()!=0 && birth.getText().length()!=0 && phone.getText().length()!=0 && ic.getText().length()!=0 && email.getText().length()!=0 && gender.getText().length()!=0){
+                        if (name.getText().length()!=0 && phone.getText().length()!=0 && ic.getText().length()!=0 && email.getText().length()!=0){
                             String uid = auth.getUid();
-                            String name1 = name.getText().toString();
-                            String birth1 = birth.getText().toString();
-                            String phone1 = phone.getText().toString();
-                            String ic1 = ic.getText().toString();
-                            String email1 = email.getText().toString();
-                            String gender1 = gender.getText().toString();
+                            String name_ = name.getText().toString();
+                            String phone_ = phone.getText().toString();
+                            String ic_ = ic.getText().toString();
+                            String email_ = email.getText().toString();
 
-                            dbref.child(uid).child("user_name").setValue(name1);
-                            dbref.child(uid).child("user_birth").setValue(birth1);
-                            dbref.child(uid).child("user_phone").setValue(phone1);
-                            dbref.child(uid).child("user_ic").setValue(ic1);
-                            dbref.child(uid).child("user_email").setValue(email1);
-                            dbref.child(uid).child("user_gender").setValue(gender1);
-                            Toast.makeText(user_profile.this,"Profile Update Successful!",Toast.LENGTH_SHORT).show();
-                            Intent intent2main = new Intent(user_profile.this, user_main.class);
+                            dbref.child(uid).child("user_name").setValue(name_);
+                            dbref.child(uid).child("user_phone").setValue(phone_);
+                            dbref.child(uid).child("user_ic").setValue(ic_);
+                            dbref.child(uid).child("user_email").setValue(email_);
+
+                            Intent intent2main = new Intent(user_profile.this, user_page.class);
                             startActivity(intent2main);
+                            Toast.makeText(user_profile.this,"Profile Update Successful!",Toast.LENGTH_SHORT).show();
                         }else {
                             Toast.makeText(user_profile.this,"Fail to Update Profile!!",Toast.LENGTH_SHORT).show();
                         }

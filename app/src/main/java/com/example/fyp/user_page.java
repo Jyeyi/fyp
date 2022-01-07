@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class user_page extends AppCompatActivity {
 
-    private TextView name, email, phone, profile, report, logout, ic;
+    private TextView name, email, phone, profile, report, logout;
 
     private FirebaseDatabase db;
     private DatabaseReference dbref;
@@ -37,6 +37,7 @@ public class user_page extends AppCompatActivity {
         report = findViewById(R.id.tx_report);
         logout = findViewById(R.id.tx_logout);
 
+
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         dbref = db.getReference("Users").child(auth.getUid());
@@ -44,13 +45,28 @@ public class user_page extends AppCompatActivity {
         dbref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String names = snapshot.child("user_name").getValue().toString();
-                String emails = snapshot.child("user_email").getValue().toString();
-                String phones = snapshot.child("user_phone").getValue().toString();
+                String name_ = snapshot.child("user_name").getValue().toString();
+                String email_ = snapshot.child("user_email").getValue().toString();
+                String phone_ = snapshot.child("user_phone").getValue().toString();
+                String ic_ = snapshot.child("user_ic").getValue().toString();
 
-                name.setText(names);
-                phone.setText(phones);
-                email.setText(emails);
+                name.setText(name_);
+                phone.setText(phone_);
+                email.setText(email_);
+
+                profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent2profile = new Intent(user_page.this, user_profile.class);
+                        intent2profile.putExtra("name", name.getText().toString());
+                        intent2profile.putExtra("phone", phone.getText().toString());
+                        intent2profile.putExtra("email", email.getText().toString());
+                        intent2profile.putExtra("ic",ic_);
+
+                        startActivity(intent2profile);
+                    }
+                });
+
             }
 
             @Override
@@ -59,17 +75,7 @@ public class user_page extends AppCompatActivity {
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent2profile = new Intent(user_page.this, user_profile.class);
-                intent2profile.putExtra("name",name.getText().toString());
-                intent2profile.putExtra("phone",phone.getText().toString());
-                intent2profile.putExtra("email",email.getText().toString());
 
-                startActivity(intent2profile);
-            }
-        });
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
