@@ -1,5 +1,6 @@
 package com.example.fyp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,8 +65,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
 
         prefs = PreferenceManager.getDefaultSharedPreferences(activity_own_ticket.this);
         uid = prefs.getString("Uid", "defaultStringIfNothingFound");
-
-    
 
         setupView();
         setupAdapter();
@@ -167,6 +167,18 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
             }
         });
 
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == START_FOR_RESULT_OWN_TICKET){
+            Log.e("124", "call back" );
+            if(resultCode == Activity.RESULT_OK){
+                ticketModelArrayList.clear();
+                setupData();
+            }
+        }
     }
 }

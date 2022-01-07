@@ -51,8 +51,13 @@
         android:layout_gravity="end|bottom"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="100dp"
-        android:src="@drawable/ic_plus"
+        android:src="@drawable/ic_add"
         android:layout_margin="16dp"
         android:layout_above="@id/ll_nav"/>
+
+    <include
+        android:id="@+id/progress_indicator"
+        layout="@layout/tool_progress_indicator"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

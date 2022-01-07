@@ -60,14 +60,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
-                prefEditor.putString("Uid", "J5Ap8JiXAwbIeUlsHhZ4ZvYGJvM2");
-                prefEditor.commit();
 
-//                Intent intent2register = new Intent(MainActivity.this, user_main.class);
-//                startActivity(intent2register);
-//                finish();
-//                Toast.makeText(MainActivity.this, "Successfully login as a user.", Toast.LENGTH_SHORT).show();
+
+                SharedPreferences prefs;
+                prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                Boolean isUserLogin  = prefs.getBoolean("isUserLogin",false);
+
+                if (isUserLogin){
+
+                }
+
 
                 if(email.getText().toString().isEmpty()){
                     email.setError("Please fill in your email!");
@@ -88,9 +90,13 @@ public class MainActivity extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 String user_type = snapshot.child("user_type").getValue().toString();
                                 if (user_type.equals("User") && user.isChecked()){
+                                    SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
+                                    prefEditor.putString("Uid", firebaseAuth.getUid());
+                                    prefEditor.commit();
                                     Intent intent2register = new Intent(MainActivity.this, user_main.class);
                                     startActivity(intent2register);
                                     finish();
+                                    prefEditor.putBoolean("isUserLogin",true);
                                     Toast.makeText(MainActivity.this, "Successfully login as a user.", Toast.LENGTH_SHORT).show();
                                 }
                                 else if (user_type.equals("Admin") && user.isChecked()){

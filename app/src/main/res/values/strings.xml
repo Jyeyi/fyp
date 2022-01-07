@@ -26,6 +26,8 @@
     <string name="own_ticket_list">Own Ticket List</string>
     <string name="ticket_history">Ticket History</string>
 
-
+    <string name="dialog_delete_ticket">Ticket is deleted</string>
+    <string name="dialog_delete_ask_title">Delete Ticket?</string>
+    <string name="dialog_delete_ask_user">Are you sure to delete this ticket?</string>
 
 </resources>

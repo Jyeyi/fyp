@@ -1,6 +1,8 @@
 package com.example.fyp;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -219,6 +221,10 @@ public class activity_user_add_ticket extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(activity_user_add_ticket.this, "Success Add", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+//                intent.putExtra(INTENT_VIEWTYPE, viewType);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
