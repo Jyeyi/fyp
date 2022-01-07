@@ -1,6 +1,6 @@
 package com.example.fyp.utility;
 
-class Constant {
+public class Constant {
     public static final String INTENT_TICKET_ID = "ticketID";
     public static final String INTENT_BUS_PLATE = "busPlate";
     public static final String INTENT_TO_LOCATION = "toLocation";
@@ -12,6 +12,9 @@ class Constant {
     public static final String INTENT_COMPANY_NAME = "companyName";
     public static final String INTENT_TICKET_PRICE = "ticketPrice";
     public static final String INTENT_STAGE = "ticketStage";
+
+    public static final int START_FOR_RESULT_OWN_TICKET = 1;
+    public static final int START_FOR_RESULT_TICKET_HISTORY = 2;
 }
 
 

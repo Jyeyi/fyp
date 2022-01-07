@@ -46,7 +46,6 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
         //set data (need to modify)
         //holder.tc_content.setText(cleanerComplaint.getReason());
 
-
         holder.tv_id.setText(ticketModel.getTicketID());
         holder.tv_companyName.setText(ticketModel.getCompanyName());
         holder.tv_departureDate.setText(ticketModel.getDepartureTime());

@@ -146,7 +146,6 @@ public class register extends AppCompatActivity {
         }
 
         private void createAcc(){
-
             auth.createUserWithEmailAndPassword(userEmail, userPass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {

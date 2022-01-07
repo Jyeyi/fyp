@@ -18,6 +18,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static com.example.fyp.utility.Constant.INTENT_ARRIVED_DATE;
+import static com.example.fyp.utility.Constant.INTENT_ARRIVED_TIME;
+import static com.example.fyp.utility.Constant.INTENT_BUS_PLATE;
+import static com.example.fyp.utility.Constant.INTENT_COMPANY_NAME;
+import static com.example.fyp.utility.Constant.INTENT_DEPARTURE_DATE;
+import static com.example.fyp.utility.Constant.INTENT_DEPARTURE_TIME;
+import static com.example.fyp.utility.Constant.INTENT_FROM_LOCATION;
+import static com.example.fyp.utility.Constant.INTENT_STAGE;
+import static com.example.fyp.utility.Constant.INTENT_TICKET_ID;
+import static com.example.fyp.utility.Constant.INTENT_TICKET_PRICE;
+import static com.example.fyp.utility.Constant.INTENT_TO_LOCATION;
+import static com.example.fyp.utility.Constant.START_FOR_RESULT_OWN_TICKET;
+
 public class activity_ticket_history extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener{
 
     private RecyclerView recyclerViewOwnTicket;
@@ -44,8 +57,6 @@ public class activity_ticket_history extends AppCompatActivity implements Adapte
             ticket.setFromLocation("jb");
             ticket.setDepartureTime("12/1/2022 2PM");
             ticket.setTicketID("121212");
-
-            //ticket.setAdultTicket(true);
             ticketModelArrayList.add(ticket);
         }
         setupView();
@@ -96,7 +107,23 @@ public class activity_ticket_history extends AppCompatActivity implements Adapte
 
     @Override
     public void onItemClick(int position) {
-        Log.d("try", ticketModelArrayList.get(position).getCompanyName());
-        System.out.print(ticketModelArrayList.get(position).getCompanyName());
+        Intent intent = new Intent(this, activity_ticket_history_details.class);
+        intent.putExtra(INTENT_TICKET_ID,ticketModelArrayList.get(position).getTicketID());
+        intent.putExtra(INTENT_BUS_PLATE,ticketModelArrayList.get(position).getBusPlateNumber());
+        intent.putExtra(INTENT_TO_LOCATION,ticketModelArrayList.get(position).getToLocation());
+        intent.putExtra(INTENT_FROM_LOCATION,ticketModelArrayList.get(position).getFromLocation());
+        intent.putExtra(INTENT_DEPARTURE_TIME,ticketModelArrayList.get(position).getDepartureTime());
+        intent.putExtra(INTENT_DEPARTURE_DATE,ticketModelArrayList.get(position).getDepartureDate());
+        intent.putExtra(INTENT_ARRIVED_TIME,ticketModelArrayList.get(position).getArrivedTime());
+        intent.putExtra(INTENT_ARRIVED_DATE,ticketModelArrayList.get(position).getArrivedDate());
+        intent.putExtra(INTENT_COMPANY_NAME,ticketModelArrayList.get(position).getCompanyName());
+        intent.putExtra(INTENT_TICKET_PRICE,ticketModelArrayList.get(position).getTicketPrice());
+        intent.putExtra(INTENT_STAGE,ticketModelArrayList.get(position).getStage());
+
+//        intent.putExtra()
+//        intent.putExtra(INTENT_ID,tncArrayList.get(position).getId());
+        startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
+        overridePendingTransition(0, 0);
+
     }
 }

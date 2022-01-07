@@ -1,43 +1,34 @@
 package com.example.fyp;
 
 import android.app.DatePickerDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.fyp.databinding.ActivityAddTicketBinding;
+import com.example.fyp.databinding.ActivityEditTicketBinding;
 import com.example.fyp.databinding.ToolbarViewBinding;
 import com.example.fyp.utility.CommonUtils;
 import com.example.fyp.utility.CustomTextUtils;
 import com.example.fyp.utility.DateUtils;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.disposables.CompositeDisposable;
 
 import static android.content.ContentValues.TAG;
 
-public class activity_user_add_ticket extends AppCompatActivity {
+public class activity_user_edit_ticket extends AppCompatActivity {
 
     private CompositeDisposable compositeDisposable;
     private ToolbarViewBinding toolbar;
-    private ActivityAddTicketBinding binding;
+    private ActivityEditTicketBinding binding;
     EditText etBusId, etBusPlateNo, etToLocation, etFromLocation, etDepartureDate, etDepartureTime, etArriveTime, etArrivedDate;
     EditText etTicketPrice, etStage, etCompanyName;
     final Calendar myCalendar= Calendar.getInstance();
@@ -45,32 +36,20 @@ public class activity_user_add_ticket extends AppCompatActivity {
     private static final int DATE_DEPARTURE = 1;
     private static final int DATE_ARRIVAL = 2;
 
-    //Firebase
-    private FirebaseAuth auth;
-    private FirebaseDatabase db;
-    private DatabaseReference dbref;
-    SharedPreferences prefs;
-    String uid = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddTicketBinding.inflate(getLayoutInflater());
+        binding = ActivityEditTicketBinding.inflate(getLayoutInflater());
         toolbar = binding.includedToolbar;
         View view = binding.getRoot();
         setContentView(view);
 
         setToolbar();
         setOnClick();
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(activity_user_add_ticket.this);
-        uid = prefs.getString("Uid", "defaultStringIfNothingFound");
-
-        auth = FirebaseAuth.getInstance();
     }
 
     private void setToolbar() {
-        toolbar.tvTitle.setText("Add Ticket");
+        toolbar.tvTitle.setText("Edit Ticket");
         toolbar.ivRight.setImageResource(R.drawable.ic_trash);
     }
 
@@ -97,8 +76,6 @@ public class activity_user_add_ticket extends AppCompatActivity {
             }
         };
 
-
-
         toolbar.rlLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +89,7 @@ public class activity_user_add_ticket extends AppCompatActivity {
                 System.out.print("test departure date");
                 Log.d("1","test departure date");
 
-                new DatePickerDialog(activity_user_add_ticket.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(activity_user_edit_ticket.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
                 showDatePicker(DATE_DEPARTURE, binding.edtDepartureDate.getText().toString());
             }
@@ -121,14 +98,7 @@ public class activity_user_add_ticket extends AppCompatActivity {
         binding.llArrivedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(activity_user_add_ticket.this,date2,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
-        binding.btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               storeData();
+                new DatePickerDialog(activity_user_edit_ticket.this,date2,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -197,38 +167,4 @@ public class activity_user_add_ticket extends AppCompatActivity {
             binding.edtArrivedDate.setText(dateFormat.format(myCalendar.getTime()));
         }
     }
-
-    private void storeData(){
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("ticketID", binding.edtTicketId.getText().toString());
-        hashMap.put("busPlateNumber", binding.edtCarPlate.getText().toString());
-        hashMap.put("toLocation", binding.edtToLocation.getText().toString());
-        hashMap.put("fromLocation", binding.edtFromLocation.getText().toString());
-        hashMap.put("departureTime", binding.editDepartureTime.getText().toString());
-        hashMap.put("departureDate", binding.edtDepartureDate.getText().toString());
-        hashMap.put("arrivedTime", binding.etArrivedTime.getText().toString());
-        hashMap.put("arrivedDate", binding.edtArrivedDate.getText().toString());
-        hashMap.put("companyName", binding.edtCompanyName.getText().toString());
-        hashMap.put("ticketPrice", binding.edtTicketPrice.getText().toString());
-        hashMap.put("stage",binding.edtTicketStage.getText().toString());
-
-       // Log.d("try", auth.getUid());
-
-        db = FirebaseDatabase.getInstance();
-        dbref = db.getReference("ticket");
-        dbref.child(uid).child(binding.edtTicketId.getText().toString()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(activity_user_add_ticket.this, "Success Add", Toast.LENGTH_LONG).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(activity_user_add_ticket.this, "Fail Add", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 }
-
-//    EditText etBusId, etBusPlateNo, etToLocation, etFromLocation, etDepartureDate, etDepartureTime, etArriveTime, etArrivedDate;
-//    EditText etTicketPrice, etStage, etCompanyName;

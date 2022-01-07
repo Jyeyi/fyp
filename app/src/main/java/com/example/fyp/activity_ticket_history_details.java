@@ -6,14 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.fyp.databinding.ActivityAddTicketBinding;
+import com.example.fyp.databinding.ActivityHistoryTicketDetailsBinding;
 import com.example.fyp.databinding.ActivityTicketDetailsBinding;
 import com.example.fyp.databinding.ToolbarViewBinding;
-import com.example.fyp.model.TicketModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,17 +27,14 @@ import static com.example.fyp.utility.Constant.INTENT_TICKET_ID;
 import static com.example.fyp.utility.Constant.INTENT_TICKET_PRICE;
 import static com.example.fyp.utility.Constant.INTENT_TO_LOCATION;
 
-public class activity_ticket_details extends AppCompatActivity {
-
+public class activity_ticket_history_details extends AppCompatActivity {
 
     String ticketId, busPlateNumber, toLocation, fromLocation, departureTime,departureDate, arrivedTime,arrivalDate , companyName,ticketPrice,ticketStage;
     TextView tv_ticket_id, tv_bus_plate, tv_to_location, tv_from_location, tv_departure_time, tv_departure_date, tv_arrived_time, tv_arrived_date;
     TextView tv_company_name, tv_ticket_price, tv_ticket_stage;
-    Button btnEdit;
 
-    private ActivityTicketDetailsBinding binding;
+    private ActivityHistoryTicketDetailsBinding binding;
     private ToolbarViewBinding toolbar;
-
 
     private FirebaseDatabase db;
     private DatabaseReference mDatabase;
@@ -49,7 +43,7 @@ public class activity_ticket_details extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_ticket_details);
+        setContentView(R.layout.activity_history_ticket_details);
 
         ticketId = getIntent().getStringExtra(INTENT_TICKET_ID);
         busPlateNumber = getIntent().getStringExtra(INTENT_BUS_PLATE);
@@ -63,7 +57,7 @@ public class activity_ticket_details extends AppCompatActivity {
         ticketPrice = getIntent().getStringExtra(INTENT_TICKET_PRICE);
         ticketStage = getIntent().getStringExtra(INTENT_STAGE);
 
-        binding = ActivityTicketDetailsBinding.inflate(getLayoutInflater());
+        binding = ActivityHistoryTicketDetailsBinding.inflate(getLayoutInflater());
         toolbar = binding.includedToolbar;
         View view = binding.getRoot();
         setContentView(view);
@@ -77,7 +71,6 @@ public class activity_ticket_details extends AppCompatActivity {
     private void setToolbar() {
         toolbar.tvTitle.setText("Ticket Details");
         toolbar.ivRight.setImageResource(R.drawable.ic_trash);
-        toolbar.rlRight.setVisibility(View.VISIBLE);
     }
 
     private void setupView() {
@@ -90,9 +83,6 @@ public class activity_ticket_details extends AppCompatActivity {
         tv_company_name = findViewById(R.id.tv_company_name);
         tv_ticket_price = findViewById(R.id.tv_ticket_price);
         tv_ticket_stage = findViewById(R.id.tv_ticket_stage);
-        btnEdit = findViewById(R.id.btn_edit);
-
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         tv_ticket_id.setText(ticketId);
         tv_bus_plate.setText(ticketId);
@@ -112,15 +102,6 @@ public class activity_ticket_details extends AppCompatActivity {
                 finish();
             }
         });
-
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity_ticket_details.this, activity_user_edit_ticket.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
 }
