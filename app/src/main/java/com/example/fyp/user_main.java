@@ -41,6 +41,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import static com.example.fyp.utility.Constant.INTENT_ARRIVED_DATE;
+import static com.example.fyp.utility.Constant.INTENT_ARRIVED_TIME;
+import static com.example.fyp.utility.Constant.INTENT_BUS_PLATE;
+import static com.example.fyp.utility.Constant.INTENT_COMPANY_NAME;
+import static com.example.fyp.utility.Constant.INTENT_DEPARTURE_DATE;
+import static com.example.fyp.utility.Constant.INTENT_DEPARTURE_TIME;
+import static com.example.fyp.utility.Constant.INTENT_FROM_LOCATION;
+import static com.example.fyp.utility.Constant.INTENT_STAGE;
+import static com.example.fyp.utility.Constant.INTENT_TICKET_ID;
+import static com.example.fyp.utility.Constant.INTENT_TICKET_PRICE;
+import static com.example.fyp.utility.Constant.INTENT_TO_LOCATION;
+import static com.example.fyp.utility.Constant.START_FOR_RESULT_OWN_TICKET;
+
 public class user_main extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener {
 
     private RecyclerView recyclerViewOwnTicket;
@@ -231,6 +244,21 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
 
     @Override
     public void onItemClick(int position) {
+        Intent intent = new Intent(this, activity_search_ticket_details.class);
+        intent.putExtra(INTENT_TICKET_ID,ticketModelArrayList.get(position).getTicketID());
+        intent.putExtra(INTENT_BUS_PLATE,ticketModelArrayList.get(position).getBusPlateNumber());
+        intent.putExtra(INTENT_TO_LOCATION,ticketModelArrayList.get(position).getToLocation());
+        intent.putExtra(INTENT_FROM_LOCATION,ticketModelArrayList.get(position).getFromLocation());
+        intent.putExtra(INTENT_DEPARTURE_TIME,ticketModelArrayList.get(position).getDepartureTime());
+        intent.putExtra(INTENT_DEPARTURE_DATE,ticketModelArrayList.get(position).getDepartureDate());
+        intent.putExtra(INTENT_ARRIVED_TIME,ticketModelArrayList.get(position).getArrivedTime());
+        intent.putExtra(INTENT_ARRIVED_DATE,ticketModelArrayList.get(position).getArrivedDate());
+        intent.putExtra(INTENT_COMPANY_NAME,ticketModelArrayList.get(position).getCompanyName());
+        intent.putExtra(INTENT_TICKET_PRICE,ticketModelArrayList.get(position).getTicketPrice());
+        intent.putExtra(INTENT_STAGE,ticketModelArrayList.get(position).getStage());
+
+        startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
+        overridePendingTransition(0, 0);
 
     }
 }
