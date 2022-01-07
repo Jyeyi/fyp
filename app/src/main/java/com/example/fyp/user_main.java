@@ -60,6 +60,7 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
     private DatabaseReference databaseReference;
     private ArrayList<TicketModel> ticketModelArrayList = new ArrayList<>();
     private AdapterOwnTicket adapterOwnTicket;
+    private ArrayList<TicketModel> filterList = new ArrayList<>();
 
     private ArrayList<String> uidList = new ArrayList<>();
 
@@ -130,7 +131,7 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
         recyclerViewOwnTicket.setHasFixedSize(true);
         recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
 
-        adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList, this);
+        adapterOwnTicket = new AdapterOwnTicket(this, filterList, this);
         recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
     }
 
@@ -183,7 +184,7 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
                                 ticketModelArrayList.add(ticket);
 
                         }
-                      //  adapterOwnTicket.notifyDataSetChanged();
+                       adapterOwnTicket.notifyDataSetChanged();
 
                         if (ticketModelArrayList.isEmpty()) {
                             Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_LONG).show();
@@ -225,9 +226,19 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("From:", binding.edtFromLocation.getText().toString());
-                Log.d("To:", binding.edtToLocation.getText().toString());
-                Log.d("Date:", binding.edtDepartureDate.getText().toString());
+
+                for(int i = 0; i < ticketModelArrayList.size(); i++){
+                    if(ticketModelArrayList.get(i).getFromLocation().toLowerCase().equals(binding.edtFromLocation.getText().toString()) &&ticketModelArrayList.get(i).getToLocation().toLowerCase().equals(binding.edtToLocation.getText().toString()) &&
+                            ticketModelArrayList.get(i).getDepartureDate().toLowerCase().equals(binding.edtDepartureDate.getText().toString())){
+                        filterList.add(ticketModelArrayList.get(i));
+                    }
+                }
+
+                adapterOwnTicket.notifyDataSetChanged();
+
+//                Log.d("From:", binding.edtFromLocation.getText().toString());
+//                Log.d("To:", binding.edtToLocation.getText().toString());
+//                Log.d("Date:", binding.edtDepartureDate.getText().toString());
             }
         });
 
