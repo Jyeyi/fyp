@@ -46,6 +46,11 @@ public class activity_user_edit_ticket extends AppCompatActivity {
 
         setToolbar();
         setOnClick();
+        initDetails();
+    }
+
+    private void initDetails(){
+
     }
 
     private void setToolbar() {
