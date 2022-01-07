@@ -3,6 +3,7 @@ package com.example.fyp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class user_main extends AppCompatActivity {
+public class user_main extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener {
 
     private RecyclerView recyclerViewOwnTicket;
     private DatabaseReference databaseReference;
@@ -105,6 +106,15 @@ public class user_main extends AppCompatActivity {
 
     }
 
+    void setupAdapter() {
+        recyclerViewOwnTicket.setHasFixedSize(true);
+        recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
+
+        adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList, this);
+        recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
+    }
+
+
     private void setData(){
         databaseReference = FirebaseDatabase.getInstance().getReference();
         Query query = databaseReference.child("ticket");
@@ -149,10 +159,8 @@ public class user_main extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
                                 TicketModel ticket = dataSnapshot.getValue(TicketModel.class);
                                 ticketModelArrayList.add(ticket);
-
 
                         }
                       //  adapterOwnTicket.notifyDataSetChanged();
@@ -211,6 +219,11 @@ public class user_main extends AppCompatActivity {
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
 
         binding.edtDepartureDate.setText(dateFormat.format(myCalendar.getTime()));
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
 
     }
 }
