@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -129,6 +131,9 @@ public class register extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(register.this,"Success to register", Toast.LENGTH_SHORT).show();
+                    SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(register.this).edit();
+                    prefEditor.putString("Uid", auth.getUid());
+                    prefEditor.commit();
                     Intent intent2main = new Intent(register.this, user_main.class);
                     startActivity(intent2main);
                     finish();

@@ -322,16 +322,17 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/common_font_medium" />
 
-            <EditText
-                android:id="@+id/edt_company_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_margin"
-                android:background="@drawable/common_input_box"
-                android:inputType="number"
-                android:padding="@dimen/common_padding"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="@dimen/common_font_mid_large" />
+
+<!--            <EditText-->
+<!--                android:id="@+id/edt_company_name"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="@dimen/common_margin"-->
+<!--                android:background="@drawable/common_input_box"-->
+<!--                android:inputType="number"-->
+<!--                android:padding="@dimen/common_padding"-->
+<!--                android:textColor="@color/colorTextBlack"-->
+<!--                android:textSize="@dimen/common_font_mid_large" />-->
             <!-- car diary -->
 
         </LinearLayout>

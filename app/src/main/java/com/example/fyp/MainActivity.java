@@ -1,6 +1,7 @@
 package com.example.fyp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -57,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                SharedPreferences.Editor prefEditor = PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit();
+                prefEditor.putString("Uid", "J5Ap8JiXAwbIeUlsHhZ4ZvYGJvM2");
+                prefEditor.commit();
+
                 Intent intent2register = new Intent(MainActivity.this, user_main.class);
                 startActivity(intent2register);
                 finish();

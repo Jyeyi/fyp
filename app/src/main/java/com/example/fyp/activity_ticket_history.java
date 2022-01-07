@@ -44,7 +44,8 @@ public class activity_ticket_history extends AppCompatActivity implements Adapte
             ticket.setFromLocation("jb");
             ticket.setDepartureTime("12/1/2022 2PM");
             ticket.setTicketID("121212");
-            ticket.setAdultTicket(true);
+
+            //ticket.setAdultTicket(true);
             ticketModelArrayList.add(ticket);
         }
         setupView();
