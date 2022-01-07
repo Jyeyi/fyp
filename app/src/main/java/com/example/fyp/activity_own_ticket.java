@@ -64,26 +64,7 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
         prefs = PreferenceManager.getDefaultSharedPreferences(activity_own_ticket.this);
         uid = prefs.getString("Uid", "defaultStringIfNothingFound");
 
-        for (int i = 0; i < 10; i++) {
-            TicketModel ticket = new TicketModel();
-            ticket.setTicketID("sgsggs");
-            if(i % 2 != 0){
-                ticket.setCompanyName("cepatExpress");
-            } else {
-                ticket.setCompanyName("slowExpress");
-            }
-            ticket.setToLocation("chaah");
-            ticket.setFromLocation("jb");
-            ticket.setDepartureTime("2PM 12/1/2022");
-            ticket.setDepartureDate("2PM 12/1/2022");
-            ticket.setArrivedTime("2PM 12/1/2022");
-            ticket.setArrivedDate("2PM 12/1/2022");
-            ticket.setTicketPrice("RM 12");
-            ticket.setStage("Adult");
-            ticket.setBusPlateNumber("JUG1234");
-            ticket.setTicketID("121212");
-            ticketModelArrayList.add(ticket);
-        }
+    
 
         setupView();
         setupAdapter();
@@ -183,7 +164,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

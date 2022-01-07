@@ -95,11 +95,11 @@ public class activity_ticket_details extends AppCompatActivity {
 //        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         tv_ticket_id.setText(ticketId);
-        tv_bus_plate.setText(ticketId);
-        tv_to_location.setText(ticketId);
-        tv_from_location.setText(ticketId);
-        tv_departure_date.setText(departureDate);
-        tv_arrived_date.setText(arrivalDate);
+        tv_bus_plate.setText(busPlateNumber);
+        tv_to_location.setText(toLocation);
+        tv_from_location.setText(fromLocation);
+        tv_departure_date.setText(departureTime + " " + departureDate);
+        tv_arrived_date.setText(arrivedTime + " " + arrivalDate);
         tv_company_name.setText(companyName);
         tv_ticket_price.setText(ticketPrice);
         tv_ticket_stage.setText(ticketStage);
