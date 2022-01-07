@@ -212,7 +212,6 @@ public class activity_user_add_ticket extends AppCompatActivity {
         hashMap.put("ticketPrice", binding.edtTicketPrice.getText().toString());
         hashMap.put("stage",binding.edtTicketStage.getText().toString());
 
-       // Log.d("try", auth.getUid());
 
         db = FirebaseDatabase.getInstance();
         dbref = db.getReference("ticket");

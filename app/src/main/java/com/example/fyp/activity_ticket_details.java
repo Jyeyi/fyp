@@ -121,6 +121,12 @@ public class activity_ticket_details extends AppCompatActivity {
             }
         });
 
+        toolbar.rlLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
     }
 
 }

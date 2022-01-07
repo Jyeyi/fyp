@@ -52,7 +52,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_ticket);
 
-
         for (int i = 0; i < 10; i++) {
             TicketModel ticket = new TicketModel();
             ticket.setTicketID("sgsggs");
@@ -70,7 +69,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
             ticket.setTicketPrice("RM 12");
             ticket.setStage("Adult");
             ticket.setBusPlateNumber("JUG1234");
-
             ticket.setTicketID("121212");
             ticketModelArrayList.add(ticket);
         }
@@ -87,7 +85,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
             }
         });
     }
-
 
     void setupView() {
         recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
@@ -151,8 +148,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
 //        intent.putExtra(INTENT_ID,tncArrayList.get(position).getId());
         startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
         overridePendingTransition(0, 0);
-
-
 
     }
 }
