@@ -62,10 +62,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//                Intent intent2register = new Intent(MainActivity.this, user_main.class);
-//                startActivity(intent2register);
-//                finish();
-//                Toast.makeText(MainActivity.this, "Successfully login as a user.", Toast.LENGTH_SHORT).show();
+                SharedPreferences prefs;
+                prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                Boolean isUserLogin  = prefs.getBoolean("isUserLogin",false);
+
+                if (isUserLogin){
+
+                }
+
 
                 if(email.getText().toString().isEmpty()){
                     email.setError("Please fill in your email!");
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent2register = new Intent(MainActivity.this, user_main.class);
                                     startActivity(intent2register);
                                     finish();
+                                    prefEditor.putBoolean("isUserLogin",true);
                                     Toast.makeText(MainActivity.this, "Successfully login as a user.", Toast.LENGTH_SHORT).show();
                                 }
                                 else if (user_type.equals("Admin") && user.isChecked()){

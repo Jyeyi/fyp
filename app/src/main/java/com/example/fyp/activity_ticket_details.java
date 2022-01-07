@@ -1,21 +1,33 @@
 package com.example.fyp;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.fyp.databinding.ActivityAddTicketBinding;
 import com.example.fyp.databinding.ActivityTicketDetailsBinding;
 import com.example.fyp.databinding.ToolbarViewBinding;
 import com.example.fyp.model.TicketModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static com.example.fyp.utility.Constant.INTENT_ARRIVED_DATE;
@@ -45,11 +57,19 @@ public class activity_ticket_details extends AppCompatActivity {
     private FirebaseDatabase db;
     private DatabaseReference mDatabase;
 
+    RelativeLayout progressIndicator;
+
+    SharedPreferences prefs;
+    String uid = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_ticket_details);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(activity_ticket_details.this);
+        uid = prefs.getString("Uid", "defaultStringIfNothingFound");
 
         ticketId = getIntent().getStringExtra(INTENT_TICKET_ID);
         busPlateNumber = getIntent().getStringExtra(INTENT_BUS_PLATE);
@@ -91,6 +111,8 @@ public class activity_ticket_details extends AppCompatActivity {
         tv_ticket_price = findViewById(R.id.tv_ticket_price);
         tv_ticket_stage = findViewById(R.id.tv_ticket_stage);
         btnEdit = findViewById(R.id.btn_edit);
+        progressIndicator = findViewById(R.id.progress_indicator);
+
 
 //        mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -121,12 +143,66 @@ public class activity_ticket_details extends AppCompatActivity {
             }
         });
 
-        toolbar.rlLeft.setOnClickListener(new View.OnClickListener() {
+        toolbar.rlRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog alertDialog = new AlertDialog.Builder(activity_ticket_details.this)
+                        .setTitle(getString(R.string.dialog_delete_ask_title))
+                        .setMessage(getString(R.string.dialog_delete_ask_user))
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                progressIndicator.setVisibility(View.VISIBLE);
+                                deleteTicket();
+                            }
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        }).show();
             }
         });
+    }
 
+    private void deleteTicket() {
+        DatabaseReference dRef = FirebaseDatabase.getInstance().getReference();
+        Query query = dRef.child("ticket").child(uid).equalTo(ticketId);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    dataSnapshot.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            progressIndicator.setVisibility(View.GONE);
+                            AlertDialog alertDialog = new AlertDialog.Builder(activity_ticket_details.this)
+                                    .setTitle(getString(R.string.dialog_delete_ask_user))
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.dismiss();
+                                            Intent intent = new Intent();
+                                            setResult(Activity.RESULT_OK, intent);
+                                            finish();
+                                        }
+                                    }).show();
+                            //Toast.makeText(AdminUserEditActivity.this, "User is deleted:", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        progressIndicator.setVisibility(View.GONE);
     }
 
 }
