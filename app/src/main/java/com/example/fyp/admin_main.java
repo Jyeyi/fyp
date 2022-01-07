@@ -1,38 +1,20 @@
 package com.example.fyp;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-public class user_main extends AppCompatActivity {
-
-    private FirebaseDatabase db;
-    private DatabaseReference dbref;
-    private FirebaseAuth auth;
+public class admin_main extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_main);
-
+        setContentView(R.layout.activity_admin_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -41,10 +23,10 @@ public class user_main extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.purchase:
-                        startActivity(new Intent(getApplicationContext(), user_profile.class));
+                        startActivity(new Intent(getApplicationContext(), admin_main.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.ticket:
+                    case R.id.complaint:
                         startActivity(new Intent(getApplicationContext(), test.class));
                         overridePendingTransition(0,0);
                         return true;
@@ -52,14 +34,13 @@ public class user_main extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), user_main.class));
                         overridePendingTransition(0,0);
                         return true;
-                    case R.id.setting:
-                        startActivity(new Intent(getApplicationContext(), user_page.class));
+                    case R.id.user:
+                        startActivity(new Intent(getApplicationContext(), admin_user.class));
                         overridePendingTransition(0, 0);
                         return true;
                 }
                 return false;
             }
         });
-
     }
 }

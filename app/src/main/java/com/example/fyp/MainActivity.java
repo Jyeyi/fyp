@@ -1,6 +1,8 @@
 package com.example.fyp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.LoginFilter;
 import android.util.Log;
 import android.view.View;
 
@@ -36,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton user, admin;
     private Button login;
     private TextView register, resetPassword;
+    SharedPreferences usersSession;
+
+    public static final String filename = "login";
+    public static final String Email = "email";
+    public static final String Password = "password";
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference dbref;
@@ -54,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //usersSession = getSharedPreferences(filename, Context.MODE_PRIVATE);
+        //if (usersSession.contains(Email)){
+            //Intent intent2 = new Intent(MainActivity.this,user_main.class);
+           // startActivity(intent2);
+        //}
+        //else {
+           // Intent intent2 = new Intent(MainActivity.this,MainActivity.class);
+           // startActivity(intent2);
+        //}
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,28 +85,40 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                //String email1 = email.getText().toString();
+                //String password1 = password.getText().toString();
+
                 firebaseAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         dbref = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseAuth.getUid());
                         dbref.addValueEventListener(new ValueEventListener() {
+
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                                 String user_type = snapshot.child("user_type").getValue().toString();
+
                                 if (user_type.equals("User") && user.isChecked()){
-                                    Intent intent2register = new Intent(MainActivity.this, user_main.class);
-                                    startActivity(intent2register);
+                                   // SharedPreferences.Editor editor = usersSession.edit();
+                                    //editor.putString(Email,email1);
+                                   // editor.putString(Password,password1);
+                                   // editor.commit();
+                                    startActivity(new Intent(getApplicationContext(),user_main.class)) ;
+                                    //Intent intent2register = new Intent(MainActivity.this, user_main.class);
+                                    //startActivity(intent2register);
                                     finish();
                                     Toast.makeText(MainActivity.this, "Successfully login as a user.", Toast.LENGTH_SHORT).show();
                                 }
-                                else if (user_type.equals("Admin") && user.isChecked()){
-                                    Intent intent2register = new Intent(MainActivity.this, user_main.class);
-                                    startActivity(intent2register);
+                                else if (user_type.equals("Admin") && admin.isChecked()){
+                                    startActivity(new Intent(getApplicationContext(),admin_main.class)) ;
                                     finish();
                                     Toast.makeText(MainActivity.this, "Successfully login as a admin.", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
                                     finish();
+                                    startActivity(getIntent());
                                     Toast.makeText(MainActivity.this, "Unsuccessfully login.", Toast.LENGTH_SHORT).show();
 
                                 }

@@ -120,8 +120,8 @@ public class register extends AppCompatActivity {
             hashMap.put("user_phone", "" + userPhone);
             hashMap.put("user_email", "" + userEmail);
             hashMap.put("user_pass", "" + userPass);
-            hashMap.put("user_birth","");
-            hashMap.put("user_gender","");
+            //hashMap.put("user_birth","");
+            //hashMap.put("user_gender","");
 
             db = FirebaseDatabase.getInstance();
             dbref = db.getReference("Users");
