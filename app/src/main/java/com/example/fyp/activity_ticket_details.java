@@ -53,7 +53,6 @@ public class activity_ticket_details extends AppCompatActivity {
     private ActivityTicketDetailsBinding binding;
     private ToolbarViewBinding toolbar;
 
-
     private FirebaseDatabase db;
     private DatabaseReference mDatabase;
 

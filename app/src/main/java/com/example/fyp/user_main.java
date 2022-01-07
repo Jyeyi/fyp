@@ -98,11 +98,18 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
             }
         });
 
+        setupView();
+        setupAdapter();
         setOnClick();
         setData();
 
         prefs = PreferenceManager.getDefaultSharedPreferences(user_main.this);
         uid = prefs.getString("Uid", "defaultStringIfNothingFound");
+
+    }
+
+    void setupView() {
+        recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
 
     }
 
