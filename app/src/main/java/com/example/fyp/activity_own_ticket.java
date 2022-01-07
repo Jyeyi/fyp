@@ -1,11 +1,14 @@
 package com.example.fyp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.fyp.adapter.AdapterOwnTicket;
 import com.example.fyp.databinding.ToolbarViewBinding;
@@ -13,8 +16,12 @@ import com.example.fyp.model.TicketModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -46,11 +53,16 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
     private AdapterOwnTicket adapterOwnTicket;
     private FloatingActionButton fabAddTicket;
     private ToolbarViewBinding toolbar;
+    SharedPreferences prefs;
+    String uid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_ticket);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(activity_own_ticket.this);
+        uid = prefs.getString("Uid", "defaultStringIfNothingFound");
 
         for (int i = 0; i < 10; i++) {
             TicketModel ticket = new TicketModel();
@@ -76,6 +88,7 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
         setupView();
         setupAdapter();
         setupNavigationBar();
+        setupData();
 
         fabAddTicket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,10 +157,36 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
         intent.putExtra(INTENT_TICKET_PRICE,ticketModelArrayList.get(position).getTicketPrice());
         intent.putExtra(INTENT_STAGE,ticketModelArrayList.get(position).getStage());
 
-//        intent.putExtra()
-//        intent.putExtra(INTENT_ID,tncArrayList.get(position).getId());
         startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
         overridePendingTransition(0, 0);
+
+    }
+
+    private void setupData() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        Query query = databaseReference.child("ticket").child(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        TicketModel ticket = dataSnapshot.getValue(TicketModel.class);
+                        ticketModelArrayList.add(ticket);
+                    }
+                    adapterOwnTicket.notifyDataSetChanged();
+
+                    if (ticketModelArrayList.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 }

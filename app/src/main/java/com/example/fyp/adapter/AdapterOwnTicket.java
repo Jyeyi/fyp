@@ -49,8 +49,8 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
         holder.tv_id.setText(ticketModel.getTicketID());
         holder.tv_companyName.setText(ticketModel.getCompanyName());
         holder.tv_departureDate.setText(ticketModel.getDepartureTime());
-        holder.tv_fromLocation.setText(ticketModel.getFromLocation());
-        holder.tv_toLocation.setText(ticketModel.getToLocation());
+        holder.tv_fromLocation.setText(String.format(context.getString(R.string.from_location), ticketModel.getFromLocation()));
+        holder.tv_toLocation.setText(String.format(context.getString(R.string.to_location), ticketModel.getToLocation()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
