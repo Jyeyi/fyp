@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fyp">
-        <activity android:name=".admin_main"></activity>
-        <activity android:name=".admin_menu" />
-        <activity android:name=".user_edit_profile" />
+        <activity android:name=".admin_history_detail"></activity>
+        <activity android:name=".admin_ticket_history" />
+        <activity android:name=".admin_main" />
         <activity android:name=".test" />
         <activity android:name=".admin_user_info" />
         <activity android:name=".user_add_ticket" />

@@ -25,7 +25,7 @@
     <string name="ticket_stage">Stage</string>
     <string name="own_ticket_list">Own Ticket List</string>
     <string name="ticket_history">Ticket History</string>
-
+    <string name="admin_ticket_history">All Ticket History</string>
 
 
 </resources>
