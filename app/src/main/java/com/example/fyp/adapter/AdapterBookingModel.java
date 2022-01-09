@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fyp.R;
+import com.example.fyp.model.BookingModel;
 import com.example.fyp.model.TicketModel;
 
 import java.util.ArrayList;
@@ -15,17 +16,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Holder>{
+public class AdapterBookingModel extends RecyclerView.Adapter<AdapterBookingModel.Holder>{
 
     private Context context;
     //array list <data class>
-    public ArrayList<TicketModel> ticketModelArrayList;
+    public ArrayList<BookingModel> bookingModelsArrayList;
     private ItemClickListener mListener;
 
     //constructor
-    public AdapterOwnTicket(Context context, ArrayList<TicketModel> ticketModels, ItemClickListener listener) {
+    public AdapterBookingModel(Context context, ArrayList<BookingModel> bookingModels, ItemClickListener listener) {
         this.context = context;
-        this.ticketModelArrayList = ticketModels;
+        this.bookingModelsArrayList = bookingModels;
         this.mListener = listener;
     }
 
@@ -41,16 +42,17 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
     public void onBindViewHolder(@NonNull Holder holder, int position) {
 
         //get data (need to modify-based on class name-that contain set and get)
-        TicketModel ticketModel = ticketModelArrayList.get(position);
+        BookingModel bookingModel = bookingModelsArrayList.get(position);
 
         //set data (need to modify)
         //holder.tc_content.setText(cleanerComplaint.getReason());
 
-        holder.tv_id.setText(ticketModel.getTicketID());
-        holder.tv_companyName.setText(ticketModel.getCompanyName());
-        holder.tv_departureDate.setText(ticketModel.getDepartureTime());
-        holder.tv_fromLocation.setText(String.format(context.getString(R.string.from_location), ticketModel.getFromLocation()));
-        holder.tv_toLocation.setText(String.format(context.getString(R.string.to_location), ticketModel.getToLocation()));
+        holder.tv_id.setText(bookingModel.getTicketID());
+        holder.tv_companyName.setText(bookingModel.getCompanyName());
+        holder.tv_departureDate.setText(bookingModel.getDepartureTime());
+        holder.tv_fromLocation.setText(bookingModel.getFromLocation());
+        holder.tv_toLocation.setText(bookingModel.getToLocation());
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +66,8 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
 
     @Override
     public int getItemCount() {
-        return ticketModelArrayList.size();
+        return bookingModelsArrayList.size();
     }
-
 
     public class Holder extends RecyclerView.ViewHolder {
         TextView tv_id;
@@ -76,7 +77,6 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
         TextView tv_fromLocation;
         // Button btnDelete;
 
-
         public Holder(@NonNull View itemView) {
             super(itemView);
             tv_id = itemView.findViewById(R.id.tv_ticket_id);
@@ -84,13 +84,10 @@ public class AdapterOwnTicket extends RecyclerView.Adapter<AdapterOwnTicket.Hold
             tv_departureDate = itemView.findViewById(R.id.tv_ticket_departure);
             tv_toLocation = itemView.findViewById(R.id.tv_ticket_to);
             tv_fromLocation = itemView.findViewById(R.id.tv_ticket_from);
-
         }
     }
-
     public interface ItemClickListener{
         void onItemClick(int position);
     }
-
 
 }

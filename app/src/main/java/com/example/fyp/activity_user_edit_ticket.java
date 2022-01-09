@@ -32,6 +32,7 @@ public class activity_user_edit_ticket extends AppCompatActivity {
     EditText etBusId, etBusPlateNo, etToLocation, etFromLocation, etDepartureDate, etDepartureTime, etArriveTime, etArrivedDate;
     EditText etTicketPrice, etStage, etCompanyName;
     final Calendar myCalendar= Calendar.getInstance();
+    String ticketId, busPlateNo, toLocation, fromLocation, departureDate, departureTime, arriveTime, arriveDate, ticketPrice, stage, companyName;
     // date picker
     private static final int DATE_DEPARTURE = 1;
     private static final int DATE_ARRIVAL = 2;
@@ -46,6 +47,11 @@ public class activity_user_edit_ticket extends AppCompatActivity {
 
         setToolbar();
         setOnClick();
+        initDetails();
+    }
+
+    private void initDetails(){
+
     }
 
     private void setToolbar() {

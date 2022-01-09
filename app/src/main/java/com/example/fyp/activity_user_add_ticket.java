@@ -1,6 +1,8 @@
 package com.example.fyp;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -212,14 +214,17 @@ public class activity_user_add_ticket extends AppCompatActivity {
         hashMap.put("ticketPrice", binding.edtTicketPrice.getText().toString());
         hashMap.put("stage",binding.edtTicketStage.getText().toString());
 
-       // Log.d("try", auth.getUid());
 
         db = FirebaseDatabase.getInstance();
         dbref = db.getReference("ticket");
-        dbref.child(uid).child(binding.edtTicketId.getText().toString()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        dbref.child("qwerf557555g66gg77uh6").child(binding.edtTicketId.getText().toString()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(activity_user_add_ticket.this, "Success Add", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent();
+//                intent.putExtra(INTENT_VIEWTYPE, viewType);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

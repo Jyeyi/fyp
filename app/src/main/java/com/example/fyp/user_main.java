@@ -3,11 +3,16 @@ package com.example.fyp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import io.reactivex.disposables.CompositeDisposable;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +21,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.fyp.adapter.AdapterOwnTicket;
 import com.example.fyp.databinding.ActivityAddTicketBinding;
 import com.example.fyp.databinding.ActivityUserMainBinding;
 import com.example.fyp.databinding.ToolbarViewBinding;
+import com.example.fyp.model.TicketModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -26,16 +33,36 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class user_main extends AppCompatActivity {
+import static com.example.fyp.utility.Constant.INTENT_ARRIVED_DATE;
+import static com.example.fyp.utility.Constant.INTENT_ARRIVED_TIME;
+import static com.example.fyp.utility.Constant.INTENT_BUS_PLATE;
+import static com.example.fyp.utility.Constant.INTENT_COMPANY_NAME;
+import static com.example.fyp.utility.Constant.INTENT_DEPARTURE_DATE;
+import static com.example.fyp.utility.Constant.INTENT_DEPARTURE_TIME;
+import static com.example.fyp.utility.Constant.INTENT_FROM_LOCATION;
+import static com.example.fyp.utility.Constant.INTENT_STAGE;
+import static com.example.fyp.utility.Constant.INTENT_TICKET_ID;
+import static com.example.fyp.utility.Constant.INTENT_TICKET_PRICE;
+import static com.example.fyp.utility.Constant.INTENT_TO_LOCATION;
+import static com.example.fyp.utility.Constant.START_FOR_RESULT_OWN_TICKET;
 
-    private FirebaseDatabase db;
-    private DatabaseReference dbref;
-    private FirebaseAuth auth;
+public class user_main extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener {
+
+    private RecyclerView recyclerViewOwnTicket;
+    private DatabaseReference databaseReference;
+    private ArrayList<TicketModel> ticketModelArrayList = new ArrayList<>();
+    private AdapterOwnTicket adapterOwnTicket;
+    private ArrayList<TicketModel> filterList = new ArrayList<>();
+
+    private ArrayList<String> uidList = new ArrayList<>();
 
     private CompositeDisposable compositeDisposable;
     private ToolbarViewBinding toolbar;
@@ -46,6 +73,9 @@ public class user_main extends AppCompatActivity {
     // date picker
     private static final int DATE_DEPARTURE = 1;
     private static final int DATE_ARRIVAL = 2;
+
+    SharedPreferences prefs;
+    String uid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +112,93 @@ public class user_main extends AppCompatActivity {
             }
         });
 
+        setupView();
+        setupAdapter();
         setOnClick();
+        setData();
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(user_main.this);
+        uid = prefs.getString("Uid", "defaultStringIfNothingFound");
+
+    }
+
+    void setupView() {
+        recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
+
+    }
+
+    void setupAdapter() {
+        recyclerViewOwnTicket.setHasFixedSize(true);
+        recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
+
+        adapterOwnTicket = new AdapterOwnTicket(this, filterList, this);
+        recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
+    }
+
+
+    private void setData(){
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        Query query = databaseReference.child("ticket");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        Log.d("Array", dataSnapshot.getRef().getKey());
+                        uidList.add(dataSnapshot.getRef().getKey());
+
+//                        TicketModel ticket = dataSnapshot.getValue(TicketModel.class);
+//                        ticketModelArrayList.add(ticket);
+                    }
+
+                    getList();
+                   // adapterOwnTicket.notifyDataSetChanged();
+
+//                    if (ticketModelArrayList.isEmpty()) {
+//                        Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        getList();
+//                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+
+        });
+
+
+
+    }
+
+    private void getList(){
+        for(int i = 0; i < uidList.size(); i++){
+            Query query = databaseReference.child("ticket").child(uidList.get(i));
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                TicketModel ticket = dataSnapshot.getValue(TicketModel.class);
+                                ticketModelArrayList.add(ticket);
+
+                        }
+                       adapterOwnTicket.notifyDataSetChanged();
+
+                        if (ticketModelArrayList.isEmpty()) {
+                            Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_LONG).show();
+                        } else {
+                            Log.d("hello", String.valueOf(ticketModelArrayList.size()));
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
     }
 
     private void setOnClick() {
@@ -111,9 +226,19 @@ public class user_main extends AppCompatActivity {
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("From:", binding.edtFromLocation.getText().toString());
-                Log.d("To:", binding.edtToLocation.getText().toString());
-                Log.d("Date:", binding.edtDepartureDate.getText().toString());
+
+                for(int i = 0; i < ticketModelArrayList.size(); i++){
+                    if(ticketModelArrayList.get(i).getFromLocation().toLowerCase().equals(binding.edtFromLocation.getText().toString()) &&ticketModelArrayList.get(i).getToLocation().toLowerCase().equals(binding.edtToLocation.getText().toString()) &&
+                            ticketModelArrayList.get(i).getDepartureDate().toLowerCase().equals(binding.edtDepartureDate.getText().toString())){
+                        filterList.add(ticketModelArrayList.get(i));
+                    }
+                }
+
+                adapterOwnTicket.notifyDataSetChanged();
+
+//                Log.d("From:", binding.edtFromLocation.getText().toString());
+//                Log.d("To:", binding.edtToLocation.getText().toString());
+//                Log.d("Date:", binding.edtDepartureDate.getText().toString());
             }
         });
 
@@ -125,6 +250,26 @@ public class user_main extends AppCompatActivity {
         SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
 
         binding.edtDepartureDate.setText(dateFormat.format(myCalendar.getTime()));
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent = new Intent(this, activity_search_ticket_details.class);
+        intent.putExtra(INTENT_TICKET_ID,ticketModelArrayList.get(position).getTicketID());
+        intent.putExtra(INTENT_BUS_PLATE,ticketModelArrayList.get(position).getBusPlateNumber());
+        intent.putExtra(INTENT_TO_LOCATION,ticketModelArrayList.get(position).getToLocation());
+        intent.putExtra(INTENT_FROM_LOCATION,ticketModelArrayList.get(position).getFromLocation());
+        intent.putExtra(INTENT_DEPARTURE_TIME,ticketModelArrayList.get(position).getDepartureTime());
+        intent.putExtra(INTENT_DEPARTURE_DATE,ticketModelArrayList.get(position).getDepartureDate());
+        intent.putExtra(INTENT_ARRIVED_TIME,ticketModelArrayList.get(position).getArrivedTime());
+        intent.putExtra(INTENT_ARRIVED_DATE,ticketModelArrayList.get(position).getArrivedDate());
+        intent.putExtra(INTENT_COMPANY_NAME,ticketModelArrayList.get(position).getCompanyName());
+        intent.putExtra(INTENT_TICKET_PRICE,ticketModelArrayList.get(position).getTicketPrice());
+        intent.putExtra(INTENT_STAGE,ticketModelArrayList.get(position).getStage());
+
+        startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
+        overridePendingTransition(0, 0);
 
     }
 }
