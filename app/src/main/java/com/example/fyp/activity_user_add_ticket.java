@@ -213,11 +213,13 @@ public class activity_user_add_ticket extends AppCompatActivity {
         hashMap.put("companyName", binding.edtCompanyName.getText().toString());
         hashMap.put("ticketPrice", binding.edtTicketPrice.getText().toString());
         hashMap.put("stage",binding.edtTicketStage.getText().toString());
+        hashMap.put("userID", uid);
+
 
 
         db = FirebaseDatabase.getInstance();
         dbref = db.getReference("ticket");
-        dbref.child("qwerf557555g66gg77uh6").child(binding.edtTicketId.getText().toString()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        dbref.child(uid).child(binding.edtTicketId.getText().toString()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(activity_user_add_ticket.this, "Success Add", Toast.LENGTH_LONG).show();

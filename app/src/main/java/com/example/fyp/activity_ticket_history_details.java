@@ -69,7 +69,7 @@ public class activity_ticket_history_details extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        toolbar.tvTitle.setText("Ticket Details");
+        toolbar.tvTitle.setText("Booking Details");
         toolbar.ivRight.setImageResource(R.drawable.ic_trash);
     }
 

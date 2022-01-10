@@ -4,8 +4,8 @@ public class BookingModel {
     private String bookingID;
     private String bookingDate;
     private String bookingTime;
-    private String ticketID;
     private String busPlateNumber;
+    private String ticketID;
     private String toLocation;
     private String fromLocation;
     private String departureTime;

@@ -44,6 +44,7 @@ import static com.example.fyp.utility.Constant.INTENT_STAGE;
 import static com.example.fyp.utility.Constant.INTENT_TICKET_ID;
 import static com.example.fyp.utility.Constant.INTENT_TICKET_PRICE;
 import static com.example.fyp.utility.Constant.INTENT_TO_LOCATION;
+import static com.example.fyp.utility.Constant.START_FOR_RESULT_ADD_TICKET;
 import static com.example.fyp.utility.Constant.START_FOR_RESULT_OWN_TICKET;
 
 
@@ -75,7 +76,7 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity_own_ticket.this, activity_user_add_ticket.class);
-                startActivity(intent);
+                startActivityForResult(intent,START_FOR_RESULT_ADD_TICKET);
             }
         });
     }
@@ -173,9 +174,21 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == START_FOR_RESULT_OWN_TICKET){
+        if(requestCode == START_FOR_RESULT_OWN_TICKET  ){
             Log.e("124", "call back" );
             if(resultCode == Activity.RESULT_OK){
+                Toast.makeText(activity_own_ticket.this, "edit ticket", Toast.LENGTH_LONG).show();
+
+                ticketModelArrayList.clear();
+                setupData();
+            }
+        } else if(requestCode == START_FOR_RESULT_ADD_TICKET){
+            Log.e("124", "call back edit" );
+            if(resultCode == Activity.RESULT_OK){
+                Log.e("124", "call back edit ok " );
+
+                Toast.makeText(activity_own_ticket.this, "add ticket", Toast.LENGTH_LONG).show();
+
                 ticketModelArrayList.clear();
                 setupData();
             }
