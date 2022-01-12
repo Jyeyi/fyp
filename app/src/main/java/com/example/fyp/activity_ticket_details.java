@@ -143,7 +143,6 @@ public class activity_ticket_details extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void setupTextView(){
@@ -174,7 +173,6 @@ public class activity_ticket_details extends AppCompatActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
 
 
     }

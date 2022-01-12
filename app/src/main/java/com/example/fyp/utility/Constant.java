@@ -17,6 +17,8 @@ public class Constant {
     public static final int START_FOR_RESULT_OWN_TICKET = 1;
     public static final int START_FOR_RESULT_ADD_TICKET = 3;
     public static final int START_FOR_RESULT_EDIT_TICKET = 4;
+    public static final int START_FOR_RESULT_SEARCH_TICKET = 1;
+
     public static final int START_FOR_RESULT_TICKET_HISTORY = 2;
 }
 

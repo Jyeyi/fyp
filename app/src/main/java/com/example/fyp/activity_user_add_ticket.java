@@ -216,7 +216,6 @@ public class activity_user_add_ticket extends AppCompatActivity {
         hashMap.put("userID", uid);
 
 
-
         db = FirebaseDatabase.getInstance();
         dbref = db.getReference("ticket");
         dbref.child(uid).child(binding.edtTicketId.getText().toString()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {

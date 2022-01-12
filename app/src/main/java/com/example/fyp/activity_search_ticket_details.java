@@ -162,8 +162,11 @@ public class activity_search_ticket_details extends AppCompatActivity {
         mDatabase.child(uid).child(ticketId).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                Intent intent = new Intent();
                 Toast.makeText(activity_search_ticket_details.this, "Success Book", Toast.LENGTH_LONG).show();
                 onItemRemove();
+//                setResult(Activity.RESULT_OK, intent);
+//                finish();
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -175,9 +178,9 @@ public class activity_search_ticket_details extends AppCompatActivity {
     }
 
     private void onItemRemove(){
-        Toast.makeText(activity_search_ticket_details.this, "Hey", Toast.LENGTH_LONG).show();
         DatabaseReference dRef = FirebaseDatabase.getInstance().getReference();
         Query query = dRef.child("ticket").child(userId).orderByChild("ticketID").equalTo(ticketId);
+        Log.e("456",userId);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -185,6 +188,7 @@ public class activity_search_ticket_details extends AppCompatActivity {
                 Toast.makeText(activity_search_ticket_details.this, "no", Toast.LENGTH_LONG).show();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Toast.makeText(activity_search_ticket_details.this, "yes", Toast.LENGTH_LONG).show();
+
                     dataSnapshot.getRef().removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {

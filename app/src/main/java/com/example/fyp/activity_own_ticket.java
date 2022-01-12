@@ -177,8 +177,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
         if(requestCode == START_FOR_RESULT_OWN_TICKET  ){
             Log.e("124", "call back" );
             if(resultCode == Activity.RESULT_OK){
-                Toast.makeText(activity_own_ticket.this, "edit ticket", Toast.LENGTH_LONG).show();
-
                 ticketModelArrayList.clear();
                 setupData();
             }
@@ -187,7 +185,6 @@ public  class activity_own_ticket extends AppCompatActivity implements AdapterOw
             if(resultCode == Activity.RESULT_OK){
                 Log.e("124", "call back edit ok " );
 
-                Toast.makeText(activity_own_ticket.this, "add ticket", Toast.LENGTH_LONG).show();
 
                 ticketModelArrayList.clear();
                 setupData();
