@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.fyp.R;
+import com.example.fyp.activity_ticket_history;
 import com.example.fyp.model.BookingModel;
 import com.example.fyp.model.TicketModel;
 
@@ -24,7 +25,7 @@ public class AdapterBookingModel extends RecyclerView.Adapter<AdapterBookingMode
     private ItemClickListener mListener;
 
     //constructor
-    public AdapterBookingModel(Context context, ArrayList<BookingModel> bookingModels, ItemClickListener listener) {
+    public AdapterBookingModel(Context context, ArrayList<BookingModel> bookingModels,ItemClickListener listener) {
         this.context = context;
         this.bookingModelsArrayList = bookingModels;
         this.mListener = listener;

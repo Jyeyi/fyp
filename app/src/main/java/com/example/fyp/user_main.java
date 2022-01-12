@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.disposables.CompositeDisposable;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
@@ -52,7 +54,10 @@ import static com.example.fyp.utility.Constant.INTENT_STAGE;
 import static com.example.fyp.utility.Constant.INTENT_TICKET_ID;
 import static com.example.fyp.utility.Constant.INTENT_TICKET_PRICE;
 import static com.example.fyp.utility.Constant.INTENT_TO_LOCATION;
+import static com.example.fyp.utility.Constant.INTENT_USERID;
+import static com.example.fyp.utility.Constant.START_FOR_RESULT_ADD_TICKET;
 import static com.example.fyp.utility.Constant.START_FOR_RESULT_OWN_TICKET;
+import static com.example.fyp.utility.Constant.START_FOR_RESULT_SEARCH_TICKET;
 
 public class user_main extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener {
 
@@ -73,6 +78,8 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
     // date picker
     private static final int DATE_DEPARTURE = 1;
     private static final int DATE_ARRIVAL = 2;
+    final Handler handler = new Handler();
+
 
     SharedPreferences prefs;
     String uid = "";
@@ -112,14 +119,13 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
             }
         });
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(user_main.this);
+        uid = prefs.getString("Uid", "defaultStringIfNothingFound");
+
         setupView();
         setupAdapter();
         setOnClick();
         setData();
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(user_main.this);
-        uid = prefs.getString("Uid", "defaultStringIfNothingFound");
-
     }
 
     void setupView() {
@@ -144,21 +150,15 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        Log.d("Array", dataSnapshot.getRef().getKey());
-                        uidList.add(dataSnapshot.getRef().getKey());
-
-//                        TicketModel ticket = dataSnapshot.getValue(TicketModel.class);
-//                        ticketModelArrayList.add(ticket);
+                        Log.d("Array", String.valueOf(dataSnapshot.getRef().getKey() != uid));
+                        if(!dataSnapshot.getRef().getKey().equals(uid)){
+                            uidList.add(dataSnapshot.getRef().getKey());
+                        }
                     }
+                    adapterOwnTicket.notifyDataSetChanged();
+
 
                     getList();
-                   // adapterOwnTicket.notifyDataSetChanged();
-
-//                    if (ticketModelArrayList.isEmpty()) {
-//                        Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_LONG).show();
-//                    } else {
-//                        getList();
-//                    }
                 }
             }
 
@@ -174,11 +174,14 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
 
     private void getList(){
         for(int i = 0; i < uidList.size(); i++){
+            Log.d("Array", uidList.get(i));
             Query query = databaseReference.child("ticket").child(uidList.get(i));
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
+                        ticketModelArrayList.clear();
+
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                 TicketModel ticket = dataSnapshot.getValue(TicketModel.class);
                                 ticketModelArrayList.add(ticket);
@@ -189,6 +192,7 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
                         if (ticketModelArrayList.isEmpty()) {
                             Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_LONG).show();
                         } else {
+
                             Log.d("hello", String.valueOf(ticketModelArrayList.size()));
                         }
                     }
@@ -226,9 +230,10 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                filterList.clear();
 
                 for(int i = 0; i < ticketModelArrayList.size(); i++){
-                    if(ticketModelArrayList.get(i).getFromLocation().toLowerCase().equals(binding.edtFromLocation.getText().toString()) &&ticketModelArrayList.get(i).getToLocation().toLowerCase().equals(binding.edtToLocation.getText().toString()) &&
+                    if( ticketModelArrayList.get(i).getFromLocation().toLowerCase().equals(binding.edtFromLocation.getText().toString()) &&ticketModelArrayList.get(i).getToLocation().toLowerCase().equals(binding.edtToLocation.getText().toString()) &&
                             ticketModelArrayList.get(i).getDepartureDate().toLowerCase().equals(binding.edtDepartureDate.getText().toString())){
                         filterList.add(ticketModelArrayList.get(i));
                     }
@@ -267,9 +272,38 @@ public class user_main extends AppCompatActivity implements AdapterOwnTicket.Ite
         intent.putExtra(INTENT_COMPANY_NAME,ticketModelArrayList.get(position).getCompanyName());
         intent.putExtra(INTENT_TICKET_PRICE,ticketModelArrayList.get(position).getTicketPrice());
         intent.putExtra(INTENT_STAGE,ticketModelArrayList.get(position).getStage());
+        intent.putExtra(INTENT_USERID, ticketModelArrayList.get(position).getUserID());
 
-        startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
+        startActivityForResult(intent,START_FOR_RESULT_SEARCH_TICKET);
         overridePendingTransition(0, 0);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == START_FOR_RESULT_SEARCH_TICKET){
+            Log.e("124", "call back" );
+            if(resultCode == Activity.RESULT_OK){
+                Toast.makeText(user_main.this, "back", Toast.LENGTH_LONG).show();
+
+                ticketModelArrayList.clear();
+                filterList.clear();
+
+                setData();
+
+                for(int i = 0; i < ticketModelArrayList.size(); i++){
+                    if( ticketModelArrayList.get(i).getFromLocation().toLowerCase().equals(binding.edtFromLocation.getText().toString()) &&ticketModelArrayList.get(i).getToLocation().toLowerCase().equals(binding.edtToLocation.getText().toString()) &&
+                            ticketModelArrayList.get(i).getDepartureDate().toLowerCase().equals(binding.edtDepartureDate.getText().toString())){
+                        filterList.add(ticketModelArrayList.get(i));
+                    }
+                }
+                adapterOwnTicket.notifyDataSetChanged();
+
+
+
+            }
+        }
     }
 }

@@ -1,15 +1,25 @@
 package com.example.fyp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.fyp.adapter.AdapterBookingModel;
 import com.example.fyp.adapter.AdapterOwnTicket;
+import com.example.fyp.model.BookingModel;
 import com.example.fyp.model.TicketModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,48 +41,38 @@ import static com.example.fyp.utility.Constant.INTENT_TICKET_PRICE;
 import static com.example.fyp.utility.Constant.INTENT_TO_LOCATION;
 import static com.example.fyp.utility.Constant.START_FOR_RESULT_OWN_TICKET;
 
-public class activity_ticket_history extends AppCompatActivity implements AdapterOwnTicket.ItemClickListener{
+public class activity_ticket_history extends AppCompatActivity implements AdapterBookingModel.ItemClickListener{
 
     private RecyclerView recyclerViewOwnTicket;
     private DatabaseReference databaseReference;
-    private ArrayList<TicketModel> ticketModelArrayList = new ArrayList<>();
-    private AdapterOwnTicket adapterOwnTicket;
-    private FloatingActionButton fabAddTicket;
+    private ArrayList<BookingModel> bookingModelArrayList = new ArrayList<>();
+    private AdapterBookingModel adapterOwnTicket;
+
+    SharedPreferences prefs;
+    String uid = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_history);
 
-        for (int i = 0; i < 10; i++) {
-            TicketModel ticket = new TicketModel();
-            ticket.setTicketID("sgsggs");
-            if(i % 2 != 0){
-                ticket.setCompanyName("cepatExpress");
-            } else {
-                ticket.setCompanyName("slowExpress");
-            }
+        prefs = PreferenceManager.getDefaultSharedPreferences(activity_ticket_history.this);
+        uid = prefs.getString("Uid", "defaultStringIfNothingFound");
 
-            ticket.setToLocation("chaah");
-            ticket.setFromLocation("jb");
-            ticket.setDepartureTime("12/1/2022 2PM");
-            ticket.setTicketID("121212");
-            ticketModelArrayList.add(ticket);
-        }
         setupView();
         setupAdapter();
         setupNavigationBar();
+        setupData();
     }
     void setupView() {
         recyclerViewOwnTicket = findViewById(R.id.recyclerViewOwnTicket);
-        fabAddTicket = findViewById(R.id.fab);
     }
 
     void setupAdapter() {
         recyclerViewOwnTicket.setHasFixedSize(true);
         recyclerViewOwnTicket.setLayoutManager(new LinearLayoutManager(this));
 
-        adapterOwnTicket = new AdapterOwnTicket(this, ticketModelArrayList, this);
+        adapterOwnTicket = new AdapterBookingModel(this, bookingModelArrayList,  this);
         recyclerViewOwnTicket.setAdapter(adapterOwnTicket);
     }
 
@@ -105,25 +105,71 @@ public class activity_ticket_history extends AppCompatActivity implements Adapte
         });
     }
 
+    private void setupData() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        Query query = databaseReference.child("booking").child(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        BookingModel booking = dataSnapshot.getValue(BookingModel.class);
+                        bookingModelArrayList.add(booking);
+                    }
+                    adapterOwnTicket.notifyDataSetChanged();
+
+                    if (bookingModelArrayList.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "No Data Found", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
+
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, activity_ticket_history_details.class);
-        intent.putExtra(INTENT_TICKET_ID,ticketModelArrayList.get(position).getTicketID());
-        intent.putExtra(INTENT_BUS_PLATE,ticketModelArrayList.get(position).getBusPlateNumber());
-        intent.putExtra(INTENT_TO_LOCATION,ticketModelArrayList.get(position).getToLocation());
-        intent.putExtra(INTENT_FROM_LOCATION,ticketModelArrayList.get(position).getFromLocation());
-        intent.putExtra(INTENT_DEPARTURE_TIME,ticketModelArrayList.get(position).getDepartureTime());
-        intent.putExtra(INTENT_DEPARTURE_DATE,ticketModelArrayList.get(position).getDepartureDate());
-        intent.putExtra(INTENT_ARRIVED_TIME,ticketModelArrayList.get(position).getArrivedTime());
-        intent.putExtra(INTENT_ARRIVED_DATE,ticketModelArrayList.get(position).getArrivedDate());
-        intent.putExtra(INTENT_COMPANY_NAME,ticketModelArrayList.get(position).getCompanyName());
-        intent.putExtra(INTENT_TICKET_PRICE,ticketModelArrayList.get(position).getTicketPrice());
-        intent.putExtra(INTENT_STAGE,ticketModelArrayList.get(position).getStage());
+        intent.putExtra(INTENT_TICKET_ID,bookingModelArrayList.get(position).getTicketID());
+        intent.putExtra(INTENT_BUS_PLATE,bookingModelArrayList.get(position).getBusPlateNumber());
+        intent.putExtra(INTENT_TO_LOCATION,bookingModelArrayList.get(position).getToLocation());
+        intent.putExtra(INTENT_FROM_LOCATION,bookingModelArrayList.get(position).getFromLocation());
+        intent.putExtra(INTENT_DEPARTURE_TIME,bookingModelArrayList.get(position).getDepartureTime());
+        intent.putExtra(INTENT_DEPARTURE_DATE,bookingModelArrayList.get(position).getDepartureDate());
+        intent.putExtra(INTENT_ARRIVED_TIME,bookingModelArrayList.get(position).getArrivedTime());
+        intent.putExtra(INTENT_ARRIVED_DATE,bookingModelArrayList.get(position).getArrivedDate());
+        intent.putExtra(INTENT_COMPANY_NAME,bookingModelArrayList.get(position).getCompanyName());
+        intent.putExtra(INTENT_TICKET_PRICE,bookingModelArrayList.get(position).getTicketPrice());
+        intent.putExtra(INTENT_STAGE,bookingModelArrayList.get(position).getStage());
 
-//        intent.putExtra()
-//        intent.putExtra(INTENT_ID,tncArrayList.get(position).getId());
+
         startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
         overridePendingTransition(0, 0);
-
     }
+
+//    @Override
+//    public void onItemClick(int position) {
+//        Intent intent = new Intent(this, activity_ticket_history_details.class);
+//        intent.putExtra(INTENT_TICKET_ID,ticketModelArrayList.get(position).getTicketID());
+//        intent.putExtra(INTENT_BUS_PLATE,ticketModelArrayList.get(position).getBusPlateNumber());
+//        intent.putExtra(INTENT_TO_LOCATION,ticketModelArrayList.get(position).getToLocation());
+//        intent.putExtra(INTENT_FROM_LOCATION,ticketModelArrayList.get(position).getFromLocation());
+//        intent.putExtra(INTENT_DEPARTURE_TIME,ticketModelArrayList.get(position).getDepartureTime());
+//        intent.putExtra(INTENT_DEPARTURE_DATE,ticketModelArrayList.get(position).getDepartureDate());
+//        intent.putExtra(INTENT_ARRIVED_TIME,ticketModelArrayList.get(position).getArrivedTime());
+//        intent.putExtra(INTENT_ARRIVED_DATE,ticketModelArrayList.get(position).getArrivedDate());
+//        intent.putExtra(INTENT_COMPANY_NAME,ticketModelArrayList.get(position).getCompanyName());
+//        intent.putExtra(INTENT_TICKET_PRICE,ticketModelArrayList.get(position).getTicketPrice());
+//        intent.putExtra(INTENT_STAGE,ticketModelArrayList.get(position).getStage());
+//
+////        intent.putExtra()
+////        intent.putExtra(INTENT_ID,tncArrayList.get(position).getId());
+//        startActivityForResult(intent,START_FOR_RESULT_OWN_TICKET);
+//        overridePendingTransition(0, 0);
+//
+//    }
 }

@@ -12,8 +12,13 @@ public class Constant {
     public static final String INTENT_COMPANY_NAME = "companyName";
     public static final String INTENT_TICKET_PRICE = "ticketPrice";
     public static final String INTENT_STAGE = "ticketStage";
+    public static final String INTENT_USERID = "userID";
 
     public static final int START_FOR_RESULT_OWN_TICKET = 1;
+    public static final int START_FOR_RESULT_ADD_TICKET = 3;
+    public static final int START_FOR_RESULT_EDIT_TICKET = 4;
+    public static final int START_FOR_RESULT_SEARCH_TICKET = 1;
+
     public static final int START_FOR_RESULT_TICKET_HISTORY = 2;
 }
 

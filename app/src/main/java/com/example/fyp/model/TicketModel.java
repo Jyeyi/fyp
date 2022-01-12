@@ -12,12 +12,13 @@ public class TicketModel {
     private String companyName;
     private String ticketPrice;
     private String stage;
+    private String userID;
 
 
     public TicketModel() {
     }
 
-    public TicketModel(String ticketID, String busPlateNumber, String toLocation, String fromLocation, String departureTime, String departureDate, String arrivedTime, String arrivedDate, String companyName, String ticketPrice, String stage) {
+    public TicketModel(String ticketID, String busPlateNumber, String toLocation, String fromLocation, String departureTime, String departureDate, String arrivedTime, String arrivedDate, String companyName, String ticketPrice, String stage, String userID) {
         this.ticketID = ticketID;
         this.busPlateNumber = busPlateNumber;
         this.toLocation = toLocation;
@@ -29,6 +30,7 @@ public class TicketModel {
         this.companyName = companyName;
         this.ticketPrice = ticketPrice;
         this.stage = stage;
+        this.userID = userID;
     }
 
     public String getTicketID() {
@@ -117,5 +119,13 @@ public class TicketModel {
 
     public void setStage(String stage) {
         this.stage = stage;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

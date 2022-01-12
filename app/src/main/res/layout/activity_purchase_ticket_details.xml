@@ -311,16 +311,16 @@
             </LinearLayout>
             <!-- end car details -->
 
-            <TextView
-                android:id="@+id/tv_quantity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin_large"
-                android:layout_marginEnd="@dimen/common_margin"
-                android:text="Quantity"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/common_font_medium" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_quantity"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="@dimen/common_margin"-->
+<!--                android:layout_marginTop="@dimen/common_margin_large"-->
+<!--                android:layout_marginEnd="@dimen/common_margin"-->
+<!--                android:text="Quantity"-->
+<!--                android:textColor="@color/colorPrimary"-->
+<!--                android:textSize="@dimen/common_font_medium" />-->
 
 
 <!--            <EditText-->
